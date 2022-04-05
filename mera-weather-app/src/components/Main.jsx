@@ -1,5 +1,6 @@
 import React from "react";
-import { MainWrapper } from "./styles/MainWrapper.styled";
+import styled from "styled-components";
+
 
 const Main = () => {
   return (
@@ -12,5 +13,22 @@ const Main = () => {
     </MainWrapper>
   );
 };
+
+
+const MainWrapper = styled.div`
+  width: 70%;
+  background-color: red;
+
+  @media (max-width: 767px) {
+    width: 100%;
+    height: 100vh;
+    background-color: green;
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    width: 100%;
+    height: 70vh;
+    background-color: pink;
+  }
+`;
 
 export default Main;

@@ -1,6 +1,19 @@
+import React from "react";
 import styled from "styled-components";
+import DetailWeather from "./DetailWeather";
+import DayWeather from "./DayWeather";
 
-export const SideWrapper = styled.main`
+const Side = () => {
+  return (
+    <SideWrapper>
+      <DayWeather />
+      <DetailWeather />
+    </SideWrapper>
+  );
+};
+
+
+const SideWrapper = styled.div`
   width: 30%;
   background-color: purple;
   display: flex;
@@ -19,3 +32,6 @@ export const SideWrapper = styled.main`
     flex-direction: row;
   }
 `;
+
+
+export default Side;
