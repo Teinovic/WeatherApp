@@ -1,6 +1,5 @@
 import React from "react";
 import { Container } from "./styles/Container.styled.js";
-
 const dayWeather = () => {
   return (
     <Container

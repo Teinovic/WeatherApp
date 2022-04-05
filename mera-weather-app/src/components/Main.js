@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { MainWrapper } from "./styles/MainWrapper.styled";
+import { fetchFunction } from "../util/fetchFunction";
 
 const Main = () => {
+  const [apiData, setApiData] = useState();
+
+  useEffect(() => {
+    fetchFunction("https://swapi.dev/api/people/1", setApiData);
+  }, []);
+
+  console.log(apiData);
+
   return (
     <MainWrapper>
       <p>
