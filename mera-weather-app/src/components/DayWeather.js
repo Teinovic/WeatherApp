@@ -1,7 +1,10 @@
 import React from "react";
 import { Container } from "./styles/Container.styled.js";
+import { useTranslation } from "react-i18next";
 
-const dayWeather = () => {
+const DayWeather = () => {
+  const { t } = useTranslation();
+
   return (
     <Container
       compW="30%"
@@ -11,9 +14,9 @@ const dayWeather = () => {
       tabletH="30vh"
       mobH="50vh"
     >
-      Day Weather
+      {t("DayWeather")}
     </Container>
   );
 };
 
-export default dayWeather;
+export default DayWeather;

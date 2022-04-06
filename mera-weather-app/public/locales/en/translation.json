@@ -1,4 +1,5 @@
 {
     "MainPart": "THIS IS A MAIN PART !!!!!",
-    "WeatherDetails": "Weather Details" 
+    "WeatherDetails": "Weather Details", 
+    "DayWeather": "Day Weather"
 }

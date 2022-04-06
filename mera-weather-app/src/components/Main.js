@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { MainWrapper } from "./styles/MainWrapper.styled";
-import { fetchFunction } from "../util/fetchFunction";
 import { changeLanguage } from "i18next";
 import { useTranslation } from "react-i18next";
+import useHttp from "../hooks/use-http";
 
 const Main = () => {
-  const [apiData, setApiData] = useState();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const [cityData, setCityData] = useState("");
+  const { sendRequest } = useHttp();
+
+  //destructuring cities api data
+  const { _links: { "ua:item": cities } = {} } = cityData;
 
   useEffect(() => {
-    fetchFunction("https://swapi.dev/api/people/1", setApiData);
+    sendRequest(
+      { url: "https://api.teleport.org/api/urban_areas/" },
+      setCityData
+    );
   }, []);
 
-  console.log(apiData);
+  console.log(cityData);
+  console.log(cities);
 
   return (
     <MainWrapper>
@@ -23,6 +31,10 @@ const Main = () => {
       </p>
       <button onClick={() => changeLanguage("en")}>en</button>
       <button onClick={() => changeLanguage("sr")}>sr</button>
+      {cityData &&
+        cities.map((city, key) => {
+          return <p key={key}>{city.name}</p>;
+        })}
     </MainWrapper>
   );
 };
