@@ -1,4 +1,9 @@
 {
     "MainPart": "THIS IS A MAIN PART !!!!!",
-    "WeatherDetails": "Weather Details" 
+    "Humidity": "Humidity",
+    "Air Pollution": "Air Pollution",
+    "UV Index": "UV Index",
+    "Pressure": "Pressure",
+    "Description": "Sunny",
+    "Updated": "Updated 1 min ago ..."
 }
