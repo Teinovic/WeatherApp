@@ -1,4 +1,10 @@
 {
     "MainPart": "OVO JE GLAVNI DEO !!!!!",
-    "WeatherDetails": "Detalji vremenskih prilika"
+    "Humidity": "Vlaznost vazduha",
+    "Air Pollution": "Zagadjenje Vazduha",
+    "UV Index": "UV Index",
+    "Pressure": "Pritisak",
+    "Description": "Suncano",
+    "Updated": "Azurirano pre 1 minut..."
+
 }
