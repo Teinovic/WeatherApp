@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Image from "../download.jpeg";
 import { BsSun } from "react-icons/bs";
+import ReactCountryFlag from "react-country-flag"
+
 
 
 const Main = () => {
@@ -28,10 +30,10 @@ const Main = () => {
           <option value="Moscow">Moscow</option>
         </select>
         <Button right="0;" onClick={() => changeLanguage("en")}>
-          En
+        <ReactCountryFlag countryCode="US" />
         </Button>
         <Button right="2rem;" onClick={() => changeLanguage("sr")}>
-          Sr
+        <ReactCountryFlag countryCode="RS" />
         </Button>
       </ChooseCity>
       <SevenDays>
@@ -84,7 +86,7 @@ const MainWrapper = styled.div`
   background-size: cover;
   position: relative;
   display: grid;
-  grid-template-rows: 1fr 30%;
+  grid-template-rows: 1fr 40%;
 
   @media (max-width: 767px) {
     width: 100%;

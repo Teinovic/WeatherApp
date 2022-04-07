@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
 const DetailWeather = () => {
-
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Suspense>
@@ -37,8 +36,12 @@ const DetailWrapper = styled.div`
   // height:100%;
   background: linear-gradient(
     225deg,
-    rgb(80,147,120) 54%,
-    rgb(85,164,146) 69%
+    rgba(87, 152, 136, 1) 14%,
+    rgba(74, 167, 135, 1) 30%,
+    rgba(68, 153, 124, 1) 45%,
+    rgba(51, 140, 105, 1) 60%,
+    rgba(42, 126, 91, 1) 75%,
+    rgba(35, 118, 84, 1) 89%
   );
   color: white;
   display: grid;
