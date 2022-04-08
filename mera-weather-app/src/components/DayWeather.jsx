@@ -1,26 +1,32 @@
-import React from "react";
-import styled from "styled-components";
+import React,{useState} from "react";
+import styled,{keyframes} from 'styled-components';
 import { FaRedoAlt } from "react-icons/fa";
 import { BsSun } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 
-
-
 const DayWeather = () => {
+  const { t } = useTranslation();
+  const [active, setActive] = useState(false);
 
-  const {t} = useTranslation();
+
+  
+
 
   return (
     <DayWrapper>
       <DayInfo>
         <Temperature>
-          <p>32'</p>
+          <h4>30'</h4>
           <p>{t("Description")}</p>
         </Temperature>
-        <BsSun/>
+        <AnimationDiv>
+        <BsSun size={80}/>
+        </AnimationDiv>
       </DayInfo>
       <RefreshContainer>
-        <RefreshButton><FaRedoAlt/></RefreshButton>
+        <RefreshButton active={active} onClick={() => setActive(!active)}>
+          <FaRedoAlt />
+        </RefreshButton>
         <UpdatedInfo>{t("Updated")}</UpdatedInfo>
       </RefreshContainer>
     </DayWrapper>
@@ -32,8 +38,18 @@ const DayWrapper = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 3rem;
-  background-color: green;
+  grid-template-rows: 1fr 25%;
+  background: linear-gradient(
+    225deg,
+    rgba(75, 142, 152, 1) 20%,
+    rgba(77, 148, 162, 1) 35%,
+    rgba(46, 142, 153, 1) 45%,
+    rgba(39, 127, 133, 1) 55%,
+    rgba(35, 118, 127, 1) 65%,
+    rgba(32, 102, 119, 1) 75%,
+    rgba(26, 101, 103, 1) 85%
+  );
+  color: white;
 
   @media (max-width: 767px) {
     width: 100%;
@@ -47,37 +63,64 @@ const DayWrapper = styled.div`
 
 const DayInfo = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 3rem 2rem 0rem 2rem;
 `;
 
 const Temperature = styled.div`
-  display:flex;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   flex-direction: column;
+  h4 {
+    font-size: 4rem;
+    margin: 0;
+  }
+  p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+`;
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const AnimationDiv = styled.div`
+  animation: ${rotate} infinite 20s linear;
 `;
 
 const RefreshContainer = styled.div`
-  background-color: blue;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 0rem 0rem 1rem 2rem;
 `;
 const RefreshButton = styled.button`
   cursor: pointer;
-  padding: 0.25rem 1rem;
   font-size: 1rem;
   color: white;
-  background-color: black;
-  border-radius: 25%;
+  background-color: transparent;
+  animation-duration: 0.2s;
+  animation-name: ${props => (props.active ? rotate : "")};
   outline: none;
   border: none;
+  margin-right: 1rem;
 `;
 
-const UpdatedInfo = styled.h5`
+const UpdatedInfo = styled.span`
   font-size: 1rem;
-  color:white;
+  font-weight: 300;
+  color: white;
   letter-spacing: 0.2;
   margin: 0;
-`
+`;
 
 export default DayWeather;

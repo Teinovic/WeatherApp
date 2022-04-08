@@ -10,6 +10,7 @@
     "i18next-browser-languagedetector": "^6.1.4",
     "i18next-http-backend": "^1.4.0",
     "react": "^18.0.0",
+    "react-country-flag": "^3.0.2",
     "react-dom": "^18.0.0",
     "react-i18next": "^11.16.2",
     "react-icons": "^4.3.1",
