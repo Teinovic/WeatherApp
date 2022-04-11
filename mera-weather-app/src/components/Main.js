@@ -58,12 +58,16 @@ const Main = () => {
 
    console.log(currentCityApiData);
   console.log(currentCityCoordinates);
-  // console.log(currentCityImageData);
+  console.log(currentCityImageData.photos[0].image.mobile);
   console.log(weatherData,"WEATHER DATA")
+
+  // from currentCityApiData
+  const backgroundImage = currentCityImageData.photos[0].image.mobile;
+
   if (weatherData) console.log(weatherData.daily.slice(0, -1),"PRIKAZI");
 
   return (
-    <MainWrapper image={Image}>
+    <MainWrapper image={backgroundImage ? backgroundImage : Image}>
       <ChooseCity>
         <p>{t("MainPart")}</p>
         <select
@@ -114,8 +118,7 @@ const Main = () => {
 
 const MainWrapper = styled.div`
   width: 70%;
-  background-image: url(${(props) => props.image}),
-    linear-gradient(#eb01a5, #d13531); /* W3C */
+  background-image: url(${(props) => props.image});
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
