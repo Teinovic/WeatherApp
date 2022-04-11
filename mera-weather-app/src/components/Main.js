@@ -6,6 +6,7 @@ import Image from "../download.jpeg";
 import { BsSun } from "react-icons/bs";
 import useHttp from "../hooks/use-http";
 
+
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const Main = () => {
@@ -55,10 +56,11 @@ const Main = () => {
     }
   }, [currentCityCoordinates]);
 
-  // console.log(currentCityApiData);
+   console.log(currentCityApiData);
   console.log(currentCityCoordinates);
   // console.log(currentCityImageData);
-  if (weatherData) console.log(weatherData.daily.slice(0, -1));
+  console.log(weatherData,"WEATHER DATA")
+  if (weatherData) console.log(weatherData.daily.slice(0, -1),"PRIKAZI");
 
   return (
     <MainWrapper image={Image}>

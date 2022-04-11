@@ -8,9 +8,16 @@ const DayWeather = () => {
   const { t } = useTranslation();
   const [active, setActive] = useState(false);
 
+  // function for button update and animation rotate
+  const updateState = () => {
+    setInterval(() => {
+      if (!active) setActive(true);
+    }, 200);
 
-  
+    clearInterval(setInterval);
 
+    setActive(false);
+  };
 
   return (
     <DayWrapper>
@@ -20,11 +27,11 @@ const DayWeather = () => {
           <p>{t("Description")}</p>
         </Temperature>
         <AnimationDiv>
-        <BsSun size={80}/>
+          <BsSun size={80} />
         </AnimationDiv>
       </DayInfo>
       <RefreshContainer>
-        <RefreshButton active={active} onClick={() => setActive(!active)}>
+        <RefreshButton active={active} onClick={updateState}>
           <FaRedoAlt />
         </RefreshButton>
         <UpdatedInfo>{t("Updated")}</UpdatedInfo>
