@@ -3,8 +3,10 @@ import { changeLanguage } from "i18next";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Image from "../download.jpeg";
-import { BsSun } from "react-icons/bs";
 import useHttp from "../hooks/use-http";
+import ReactCountryFlag from "react-country-flag";
+import { getWeekday } from "../utils/getWeekday";
+import { getWeatherIcon } from "../utils/getWeatherIcon";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -88,20 +90,23 @@ const Main = () => {
             })}
         </select>
         <Button right="0;" onClick={() => changeLanguage("en")}>
-          En
+          <ReactCountryFlag countryCode="GB" />
         </Button>
         <Button right="2rem;" onClick={() => changeLanguage("sr")}>
-          Sr
+          <ReactCountryFlag countryCode="RS" />
         </Button>
       </ChooseCity>
       <SevenDays>
         {weatherData &&
           weatherData.daily.slice(0, -1).map((day, key) => {
+            const date = new Date(day.dt * 1000);
+            const weekdayNum = date.getDay();
+
             return (
               <Day key={key}>
-                <p>icon here</p>
+                <img src={getWeatherIcon(day.weather[0].main)} />
                 <p>{day.temp.max}</p>
-                <p>{day.dt}</p>
+                <p>{getWeekday(weekdayNum)}</p>
               </Day>
             );
           })}
