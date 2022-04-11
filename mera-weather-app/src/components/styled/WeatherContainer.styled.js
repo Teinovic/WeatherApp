@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const WeatherContainer = styled.div`
   width: 85%;
   height: 80%;
-  background-color: blue;
   display: flex;
 
   @media (max-width: 767px) {
@@ -12,7 +11,7 @@ export const WeatherContainer = styled.div`
     background-color: green;
     flex-direction: column-reverse;
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (min-width: 768px) and (max-width: 1100px) {
     width: 100%;
     height: 100vh;
     background-color: pink;

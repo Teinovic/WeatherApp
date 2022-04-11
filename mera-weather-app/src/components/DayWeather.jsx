@@ -8,23 +8,30 @@ const DayWeather = () => {
   const { t } = useTranslation();
   const [active, setActive] = useState(false);
 
+  // function for button update and animation rotate
+  const updateState = () => {
+    setInterval(() => {
+      if (!active) setActive(true);
+    }, 200);
 
-  
+    clearInterval(setInterval);
 
+    setActive(false);
+  };
 
   return (
     <DayWrapper>
       <DayInfo>
         <Temperature>
-          <h4>30'</h4>
+          <h4>30&#176;</h4>
           <p>{t("Description")}</p>
         </Temperature>
         <AnimationDiv>
-        <BsSun size={80}/>
+          <BsSun size={80} />
         </AnimationDiv>
       </DayInfo>
       <RefreshContainer>
-        <RefreshButton active={active} onClick={() => setActive(!active)}>
+        <RefreshButton active={active} onClick={updateState}>
           <FaRedoAlt />
         </RefreshButton>
         <UpdatedInfo>{t("Updated")}</UpdatedInfo>
@@ -50,12 +57,14 @@ const DayWrapper = styled.div`
     rgba(26, 101, 103, 1) 85%
   );
   color: white;
+  margin-bottom: 1rem;
 
   @media (max-width: 767px) {
     width: 100%;
     height: 50vh;
+    margin-bottom: 0rem;
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (min-width: 768px) and (max-width: 1100px) {
     width: 50%;
     height: 30vh;
   }

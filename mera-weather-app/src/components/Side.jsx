@@ -14,21 +14,23 @@ const Side = () => {
 
 const SideWrapper = styled.div`
   width: 30%;
-  background-color: purple;
   display: flex;
   flex-direction: column;
+  margin-right: 1rem;
 
   @media (max-width: 767px) {
     width: 100%;
     height: 100vh;
-    background-color: blue;
     flex-direction: column;
+    margin-right: 0rem;
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (min-width: 768px) and (max-width: 1100px) {
     width: 100%;
     height: 30vh;
     background-color: orange;
     flex-direction: row;
+    margin-right: 0rem;
+
   }
 `;
 

@@ -8,6 +8,7 @@ import ReactCountryFlag from "react-country-flag";
 import { getWeekday } from "../utils/getWeekday";
 import { getWeatherIcon } from "../utils/getWeatherIcon";
 
+
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const Main = () => {
@@ -57,15 +58,22 @@ const Main = () => {
     }
   }, [currentCityCoordinates]);
 
-  // console.log(currentCityApiData);
+   console.log(currentCityApiData);
   console.log(currentCityCoordinates);
-  // console.log(currentCityImageData);
-  if (weatherData) console.log(weatherData.daily.slice(0, -1));
+  console.log(currentCityImageData.photos[0].image.mobile);
+  console.log(weatherData,"WEATHER DATA")
+
+  // from currentCityApiData
+  const backgroundImage = currentCityImageData.photos[0].image.mobile;
+
+  if (weatherData) console.log(weatherData.daily.slice(0, -1),"PRIKAZI");
 
   return (
-    <MainWrapper image={Image}>
+    <MainWrapper image={backgroundImage ? backgroundImage : Image}>
       <ChooseCity>
-        <p>{t("MainPart")}</p>
+        <p>
+          {currentCityApiData.name}
+          </p>
         <select
           name="cities"
           id="city"
@@ -117,8 +125,7 @@ const Main = () => {
 
 const MainWrapper = styled.div`
   width: 70%;
-  background-image: url(${(props) => props.image}),
-    linear-gradient(#eb01a5, #d13531); /* W3C */
+  background-image: url(${(props) => props.image});
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -131,7 +138,7 @@ const MainWrapper = styled.div`
     height: 100vh;
     background-color: green;
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (min-width: 768px) and (max-width: 1100px) {
     width: 100%;
     height: 70vh;
     background-color: pink;
@@ -140,6 +147,14 @@ const MainWrapper = styled.div`
 
 const ChooseCity = styled.div`
   height: 100%;
+
+  p {
+    font-size: 2.5rem;
+    margin-left: 1rem;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 `;
 
 const SevenDays = styled.div`

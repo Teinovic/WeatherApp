@@ -13,7 +13,7 @@ const DetailWeather = () => {
           <h4>{t("Humidity")}</h4>
         </Humidity>
         <AirPollution>
-          <h3>25'</h3>
+          <h3>25&#176;</h3>
           <h4>{t("Air Pollution")}</h4>
         </AirPollution>
         <UvIndex>
@@ -67,7 +67,7 @@ const DetailWrapper = styled.div`
     width: 100%;
     height: 50vh;
   }
-  @media (min-width: 768px) and (max-width: 1023px) {
+  @media (min-width: 768px) and (max-width: 1100px) {
     width: 50%;
     height: 30vh;
   }
@@ -79,6 +79,7 @@ const Humidity = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
+  text-align: center;
 `;
 
 const AirPollution = styled.div`
@@ -87,6 +88,7 @@ const AirPollution = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
+  text-align: center;
 `;
 
 const UvIndex = styled.div`
@@ -95,6 +97,7 @@ const UvIndex = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
+  text-align: center;
 `;
 
 const Visibility = styled.div`
@@ -103,6 +106,7 @@ const Visibility = styled.div`
   justify-content: center;
   flex-direction: column;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
+  text-align: center;
 `;
 
 export default DetailWeather;
