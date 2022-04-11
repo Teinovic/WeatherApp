@@ -69,7 +69,9 @@ const Main = () => {
   return (
     <MainWrapper image={backgroundImage ? backgroundImage : Image}>
       <ChooseCity>
-        <p>{t("MainPart")}</p>
+        <p>
+          {currentCityApiData.name}
+          </p>
         <select
           name="cities"
           id="city"
@@ -140,6 +142,14 @@ const MainWrapper = styled.div`
 
 const ChooseCity = styled.div`
   height: 100%;
+
+  p {
+    font-size: 2.5rem;
+    margin-left: 1rem;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 `;
 
 const SevenDays = styled.div`
