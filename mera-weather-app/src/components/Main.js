@@ -60,12 +60,14 @@ const Main = () => {
 
    console.log(currentCityApiData);
   console.log(currentCityCoordinates);
-  console.log(currentCityImageData.photos[0].image.mobile);
+  //console.log(currentCityImageData.photos[0].image.mobile);
   console.log(weatherData,"WEATHER DATA")
 
   // from currentCityApiData
-  const backgroundImage = currentCityImageData.photos[0].image.mobile;
-
+  const backgroundImage = currentCityImageData && currentCityImageData.photos[0].image.mobile
+  
+  
+  
   if (weatherData) console.log(weatherData.daily.slice(0, -1),"PRIKAZI");
 
   return (
