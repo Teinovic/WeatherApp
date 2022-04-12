@@ -5,9 +5,7 @@ import styled from "styled-components";
 import Image from "../download.jpeg";
 import useHttp from "../hooks/use-http";
 import ReactCountryFlag from "react-country-flag";
-import { getWeekday } from "../utils/getWeekday";
-import { getWeatherIcon } from "../utils/getWeatherIcon";
-
+import { DayComponent } from "./Day";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -58,24 +56,22 @@ const Main = () => {
     }
   }, [currentCityCoordinates]);
 
-   console.log(currentCityApiData);
+  console.log(currentCityApiData);
   console.log(currentCityCoordinates);
-  //console.log(currentCityImageData.photos[0].image.mobile);
-  console.log(weatherData,"WEATHER DATA")
+
+  // console.log(currentCityImageData.photos[0].image.mobile);
+  console.log(weatherData, "WEATHER DATA");
 
   // from currentCityApiData
-  const backgroundImage = currentCityImageData && currentCityImageData.photos[0].image.mobile
-  
-  
-  
-  if (weatherData) console.log(weatherData.daily.slice(0, -1),"PRIKAZI");
+  const backgroundImage =
+    currentCityImageData && currentCityImageData.photos[0].image.mobile;
+
+  if (weatherData) console.log(weatherData.daily.slice(0, -1), "PRIKAZI");
 
   return (
     <MainWrapper image={backgroundImage ? backgroundImage : Image}>
       <ChooseCity>
-        <p>
-          {currentCityApiData.name}
-          </p>
+        <p>{currentCityApiData.name}</p>
         <select
           name="cities"
           id="city"
@@ -113,11 +109,12 @@ const Main = () => {
             const weekdayNum = date.getDay();
 
             return (
-              <Day key={key}>
-                <img src={getWeatherIcon(day.weather[0].main)} />
-                <p>{day.temp.max}</p>
-                <p>{getWeekday(weekdayNum)}</p>
-              </Day>
+              <DayComponent
+                key={key}
+                typeOfWeather={day.weather[0].main}
+                maxTemp={day.temp.max}
+                weekdayNum={weekdayNum}
+              />
             );
           })}
       </SevenDays>
@@ -163,16 +160,6 @@ const SevenDays = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   color: white;
-`;
-
-const Day = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  border: 0.15px solid white;
-  backdrop-filter: blur(14px);
-  background-color: rgba(255, 255, 255, 0.2);
 `;
 
 const Button = styled.button`
