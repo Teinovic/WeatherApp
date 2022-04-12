@@ -47,7 +47,6 @@ const DetailWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  background-color: orange;
 
   h3 {
     padding: 0;
@@ -70,6 +69,8 @@ const DetailWrapper = styled.div`
   @media (min-width: 768px) and (max-width: 1100px) {
     width: 50%;
     height: 30vh;
+    margin: 0.5rem;
+    
   }
 `;
 

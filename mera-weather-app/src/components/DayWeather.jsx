@@ -18,7 +18,7 @@ const DayWeather = () => {
 
     setActive(false);
   };
-
+  
   return (
     <DayWrapper>
       <DayInfo>
@@ -27,11 +27,11 @@ const DayWeather = () => {
           <p>{t("Description")}</p>
         </Temperature>
         <AnimationDiv>
-          <BsSun size={80} />
+        <BsSun size={80} />
         </AnimationDiv>
       </DayInfo>
       <RefreshContainer>
-        <RefreshButton active={active} onClick={updateState}>
+      <RefreshButton active={active} onClick={updateState}>
           <FaRedoAlt />
         </RefreshButton>
         <UpdatedInfo>{t("Updated")}</UpdatedInfo>
@@ -67,6 +67,7 @@ const DayWrapper = styled.div`
   @media (min-width: 768px) and (max-width: 1100px) {
     width: 50%;
     height: 30vh;
+    margin: 0.5rem;
   }
 `;
 

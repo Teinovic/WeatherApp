@@ -6,6 +6,7 @@ import Image from "../download.jpeg";
 import useHttp from "../hooks/use-http";
 import ReactCountryFlag from "react-country-flag";
 import { DayComponent } from "./Day";
+import { getWeekday } from "../utils/getWeekday";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -71,8 +72,7 @@ const Main = () => {
   return (
     <MainWrapper image={backgroundImage ? backgroundImage : Image}>
       <ChooseCity>
-        <p>{currentCityApiData.name}</p>
-        <select
+        <ChooseCityDropdown
           name="cities"
           id="city"
           value={currentCity}
@@ -86,15 +86,18 @@ const Main = () => {
             );
           }}
         >
+          <option value="Cities" hidden>
+            Cities
+          </option>
           {citiesData &&
             cities.map((city, key) => {
               return (
-                <option key={key} value={city.name}>
+                <DropdownOption key={key} value={city.name}>
                   {city.name}
-                </option>
+                </DropdownOption>
               );
             })}
-        </select>
+        </ChooseCityDropdown>
         <Button right="0;" onClick={() => changeLanguage("en")}>
           <ReactCountryFlag countryCode="GB" />
         </Button>
@@ -118,6 +121,15 @@ const Main = () => {
             );
           })}
       </SevenDays>
+      <SevenDaysNames>
+        {weatherData &&
+          weatherData.daily.slice(0, -1).map((day, key) => {
+            const date = new Date(day.dt * 1000);
+            const weekdayNum = date.getDay();
+
+            return <DayName>{getWeekday(weekdayNum)}</DayName>;
+          })}
+      </SevenDaysNames>
     </MainWrapper>
   );
 };
@@ -141,12 +153,15 @@ const MainWrapper = styled.div`
     width: 100%;
     height: 70vh;
     background-color: pink;
+    margin: 0.5rem;
   }
 `;
 
 const ChooseCity = styled.div`
-  height: 100%;
-
+  height: 30%;
+  width: 25%;
+  padding-left: 2rem;
+  padding-top: 2rem;
   p {
     font-size: 2.5rem;
     margin-left: 1rem;
@@ -156,10 +171,60 @@ const ChooseCity = styled.div`
   }
 `;
 
+const ChooseCityDropdown = styled.select`
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  font-size: 2.3rem;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+`;
+
+const DropdownOption = styled.option`
+  color: black;
+  background: white;
+  display: flex;
+  white-space: pre;
+  min-height: 20px;
+  padding: 0px 2px 1px;
+`;
+
 const SevenDays = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   color: white;
+  div:last-child {
+    border-right: 0;
+  }
+`;
+
+const SevenDaysNames = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  color: white;
+  p:last-child {
+    border-right: 0;
+  }
+`;
+
+const DayName = styled.p`
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding-bottom: 2vh;
+  padding-top: 0.5vh;
+  align-items: center;
+  justify-content: space-around;
+  border-right: 0.02px solid white;
+  backdrop-filter: blur(2px);
+  background-color: rgba(255, 255, 255, 0.2);
+  font-size: 0.8rem;
+  text-transform: uppercase;
 `;
 
 const Button = styled.button`
@@ -170,6 +235,12 @@ const Button = styled.button`
   position: absolute;
   top: 0;
   right: ${(props) => props.right};
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
 `;
 
 export default Main;

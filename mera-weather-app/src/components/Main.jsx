@@ -127,6 +127,12 @@ const Button = styled.button`
   position: absolute;
   top: 0;
   right: ${(props) => props.right};
+  background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
 `;
 
 export default Main;

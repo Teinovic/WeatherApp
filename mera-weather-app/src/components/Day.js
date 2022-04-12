@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { getWeekday } from "../utils/getWeekday";
 import { getWeatherIcon } from "../utils/getWeatherIcon";
 import { getImage } from "../utils/getImage";
 
-export function DayComponent({ keyProp, maxTemp, typeOfWeather, weekdayNum }) {
+export function DayComponent({ keyProp, maxTemp, typeOfWeather }) {
   const [image, setImage] = useState("");
   useEffect(() => {
     getImage(getWeatherIcon(typeOfWeather), setImage);
-  }, [image, getWeatherIcon, typeOfWeather]);
+  }, [image, typeOfWeather]);
 
   return (
-    <Day key={keyProp}>
-      <img src={image} />
-      <p>{Math.round(maxTemp)}°</p>
-      <p>{getWeekday(weekdayNum)}</p>
-    </Day>
+    <>
+      <Day key={keyProp}>
+        <img src={image} alt={typeOfWeather} />
+        <TemperatureNum>{Math.round(maxTemp)}°</TemperatureNum>
+      </Day>
+    </>
   );
 }
 
@@ -24,6 +24,20 @@ const Day = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  border: 0.15px solid white;
+  border-right: 0.02px solid white;
+  backdrop-filter: blur(2px);
   background-color: rgba(255, 255, 255, 0.2);
+  :hover {
+    {   
+        transform-origin: bottom center;
+        -webkit-transform: scale(1, 1.2);
+        -ms-transform: scale(1, 1.2);
+        transform: scale(1, 1.2);
+        transition: 1s ease;
+        cursor: circle;
+  }
+`;
+
+const TemperatureNum = styled.p`
+  font-size: 1.6rem;
 `;
