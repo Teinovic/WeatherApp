@@ -3,10 +3,15 @@ import styled,{keyframes} from 'styled-components';
 import { FaRedoAlt } from "react-icons/fa";
 import { BsSun } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+
 
 const DayWeather = () => {
   const { t } = useTranslation();
   const [active, setActive] = useState(false);
+  // for temperature
+  const weather = useSelector((state)=> state.weather.slice(-1));
+
 
   // function for button update and animation rotate
   const updateState = () => {
@@ -23,7 +28,8 @@ const DayWeather = () => {
     <DayWrapper>
       <DayInfo>
         <Temperature>
-          <h4>30&#176;</h4>
+          {/* round number for temp  */}
+          <h4>{Math.round(weather[0].current.temp)}&#176;</h4>
           <p>{t("Description")}</p>
         </Temperature>
         <AnimationDiv>
