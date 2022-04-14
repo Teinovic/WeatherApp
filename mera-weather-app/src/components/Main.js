@@ -7,6 +7,8 @@ import useHttp from "../hooks/use-http";
 import ReactCountryFlag from "react-country-flag";
 import { DayComponent } from "./Day";
 import { getWeekday } from "../utils/getWeekday";
+import { useDispatch } from 'react-redux';
+import { weatherAdded } from "../store2/weatherSlice";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -19,6 +21,16 @@ const Main = () => {
   const [weatherData, setWeatherData] = useState("");
   const { t } = useTranslation();
   const { sendRequest } = useHttp();
+  // REEDUX define dispatch ... i import useDispathc for this and weatherActions for function showWeather
+  const dispatch = useDispatch();
+
+  //REDUX put weatherData in const
+  let currentWeather = weatherData || "nesto";
+
+  // function for REDUX  ...
+  const showWeather = () => {
+    dispatch(weatherAdded(currentWeather));
+  };
 
   // destructuring cities api data
   const { _links: { "ua:item": cities } = {} } = citiesData;
@@ -54,8 +66,17 @@ const Main = () => {
         },
         setWeatherData
       );
+
+      currentWeather = weatherData;
     }
   }, [currentCityCoordinates]);
+
+  //REDUX ...
+  useEffect(() => {
+    if (weatherData) {
+      showWeather();
+    }
+  }, [weatherData]);
 
   console.log(currentCityApiData);
   console.log(currentCityCoordinates);

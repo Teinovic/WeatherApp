@@ -1,27 +1,30 @@
 import React, { Suspense } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const DetailWeather = () => {
   const { t } = useTranslation();
-
+  // for hum,pres,and all ... last item from arr ... 
+  const weather = useSelector((state)=> state.weather.slice(-1));
+  
   return (
     <Suspense>
       <DetailWrapper>
         <Humidity>
-          <h3>87%</h3>
+          <h3>{weather[0].current.humidity}</h3>
           <h4>{t("Humidity")}</h4>
         </Humidity>
         <AirPollution>
-          <h3>25&#176;</h3>
+          <h3>{weather[0].current.dew_point}&#176;</h3>
           <h4>{t("Air Pollution")}</h4>
         </AirPollution>
         <UvIndex>
-          <h3>0/10</h3>
+          <h3>{weather[0].current.uvi}</h3>
           <h4>{t("UV Index")}</h4>
         </UvIndex>
         <Visibility>
-          <h3>3.0km</h3>
+          <h3>{weather[0].current.pressure}</h3>
           <h4>{t("Pressure")}</h4>
         </Visibility>
       </DetailWrapper>
