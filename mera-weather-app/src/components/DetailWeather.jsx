@@ -17,7 +17,7 @@ const DetailWeather = () => {
         </Humidity>
         <AirPollution>
           <h3>{weather[0].current.dew_point}&#176;</h3>
-          <h4>{t("Air Pollution")}</h4>
+          <h4>{t("Dew. Pt.")}</h4>
         </AirPollution>
         <UvIndex>
           <h3>{weather[0].current.uvi}</h3>
