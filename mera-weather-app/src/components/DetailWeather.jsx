@@ -12,7 +12,7 @@ const DetailWeather = () => {
     <Suspense>
       <DetailWrapper>
         <Humidity>
-          <h3>{weather[0].current.humidity}</h3>
+          <h3>{weather[0].current.humidity}%</h3>
           <h4>{t("Humidity")}</h4>
         </Humidity>
         <AirPollution>
@@ -24,8 +24,8 @@ const DetailWeather = () => {
           <h4>{t("UV Index")}</h4>
         </UvIndex>
         <Visibility>
-          <h3>{weather[0].current.pressure}</h3>
-          <h4>{t("Pressure")}</h4>
+          <h3>{weather[0].current.pressure}km</h3>
+          <h4>{t("Visibility")}</h4>
         </Visibility>
       </DetailWrapper>
     </Suspense>

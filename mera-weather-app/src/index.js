@@ -14,7 +14,7 @@ const root = createRoot(rootElement);
 root.render(
   <StrictMode>
     <Provider store={store}>
-    <Cursor />
+    {/* <Cursor /> */}
     <App />
     </Provider>
   </StrictMode>
