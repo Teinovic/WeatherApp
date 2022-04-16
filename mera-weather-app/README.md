@@ -1,3 +1,10 @@
+
+# Deploy to Github Pages:
+
+`npm run deploy -- -m "Commit message"`
+
+**Note**: The current code in your local will be deployed, regardless of if the changes are comitted or not.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
