@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { fetchFunction } from "../util/fetchFunction";
 import { changeLanguage } from "i18next";
 import { useTranslation } from "react-i18next";
@@ -20,6 +20,7 @@ const Main = () => {
   //console.log(apiData);
 
   return (
+  
     <MainWrapper image={Image}>
       <ChooseCity>
         <p>{t("MainPart")}</p>
@@ -127,12 +128,6 @@ const Button = styled.button`
   position: absolute;
   top: 0;
   right: ${(props) => props.right};
-  background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
 `;
 
 export default Main;

@@ -31,7 +31,7 @@ const DetailWeather = () => {
 
 const DetailWrapper = styled.div`
   // width: 30%;
-  height: 40vh;
+  height: 34vh;
   width: 100%;
   // height:100%;
   background: linear-gradient(
