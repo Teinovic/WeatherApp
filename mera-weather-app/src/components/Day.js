@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { getWeatherIcon } from "../utils/getWeatherIcon";
-import { getImage } from "../utils/getImage";
+import { WeatherIcon } from "../utils/getWeatherIcon";
+import { IconContext } from "react-icons/lib";
 
 export function DayComponent({ keyProp, maxTemp, typeOfWeather }) {
-  const [image, setImage] = useState("");
-  useEffect(() => {
-    getImage(getWeatherIcon(typeOfWeather), setImage);
-  }, [image, typeOfWeather]);
-
   return (
     <>
       <Day key={keyProp}>
-        <img src={image} alt={typeOfWeather} />
+        <IconContext.Provider value={{ size: 42 }}>
+          <WeatherIcon typeOfWeather={typeOfWeather} />
+        </IconContext.Provider>
         <TemperatureNum>{Math.round(maxTemp)}°</TemperatureNum>
       </Day>
     </>
@@ -25,7 +22,7 @@ const Day = styled.div`
   align-items: center;
   justify-content: space-around;
   border-right: 0.02px solid white;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(8px);
   background-color: rgba(255, 255, 255, 0.2);
   :hover {
     {   
@@ -34,10 +31,6 @@ const Day = styled.div`
         -ms-transform: scale(1, 1.1);
         transform: scale(1, 1.1);
         transition: all 0.6s ease-in-out;
-        filter: brightness(2);
-  }
-  :not(:hover) {   
-   } 
 `;
 
 const TemperatureNum = styled.p`

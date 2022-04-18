@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { changeLanguage } from "i18next";
 import styled from "styled-components";
 import Image from "../download.jpeg";
@@ -91,12 +91,26 @@ export const Main = () => {
     <MainWrapper image={backgroundImage ? backgroundImage : Image}>
       <Dropdown citiesData={citiesData} pullSelectedCity={pullSelectedCity} />
 
-      <Button right="0;" onClick={() => changeLanguage("en")}>
-        <ReactCountryFlag countryCode="GB" />
-      </Button>
-      <Button right="2rem;" onClick={() => changeLanguage("sr")}>
-        <ReactCountryFlag countryCode="RS" />
-      </Button>
+      <ButtonContainer>
+        <Button right="0;" onClick={() => changeLanguage("en")}>
+          <ReactCountryFlag
+            countryCode="GB"
+            style={{
+              fontSize: "1.5em",
+              lineHeight: "1.5em",
+            }}
+          />
+        </Button>
+        <Button right="2rem;" onClick={() => changeLanguage("sr")}>
+          <ReactCountryFlag
+            countryCode="RS"
+            style={{
+              fontSize: "1.5em",
+              lineHeight: "1.5em",
+            }}
+          />
+        </Button>
+      </ButtonContainer>
 
       <SevenDays>
         {imgAndWeatherData &&
@@ -178,20 +192,24 @@ const DayName = styled.p`
   align-items: center;
   justify-content: space-around;
   border-right: 0.02px solid white;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(8px);
   background-color: rgba(255, 255, 255, 0.2);
   font-size: 0.8rem;
   text-transform: uppercase;
+  font-weight: 500;
+`;
+
+const ButtonContainer = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0.5rem;
 `;
 
 const Button = styled.button`
   width: 2rem;
   height: 2rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.1rem 0.5rem;
   border-radious: 25%;
-  position: absolute;
-  top: 0;
-  right: ${(props) => props.right};
   background-color: transparent;
   background-repeat: no-repeat;
   border: none;

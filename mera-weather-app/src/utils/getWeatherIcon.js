@@ -1,18 +1,27 @@
-export function getWeatherIcon(weather) {
-  switch (weather) {
+import React from "react";
+import {
+  WiThunderstorm,
+  WiRain,
+  WiSnow,
+  WiDaySunny,
+  WiCloud,
+} from "react-icons/wi";
+
+export function WeatherIcon({ typeOfWeather }) {
+  switch (typeOfWeather) {
     case "Thunderstorm":
-      return "https://openweathermap.org/img/wn/11d.png";
+      return <WiThunderstorm />;
     case "Drizzle":
       return "https://openweathermap.org/img/wn/09d.png";
     case "Rain":
-      return "https://openweathermap.org/img/wn/10d.png";
+      return <WiRain />;
     case "Snow":
-      return "https://openweathermap.org/img/wn/13d.png";
+      return <WiSnow />;
     case "Clear":
-      return "https://openweathermap.org/img/wn/01d.png";
+      return <WiDaySunny />;
     case "Clouds":
-      return "https://openweathermap.org/img/wn/04d.png";
+      return <WiCloud />;
     default:
-      break;
+      return <p>no img found</p>;
   }
 }

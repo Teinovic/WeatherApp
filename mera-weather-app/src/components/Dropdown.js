@@ -1,15 +1,34 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import {
+  BiRightArrow,
+  BiLeftArrow,
+  BiDownArrow,
+  BiUpArrow,
+} from "react-icons/bi";
 
 export function Dropdown({ citiesData, pullSelectedCity }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-
+  const [sliceOfCities, setSliceOfCities] = useState([0, 9]);
   const { _links: { "ua:item": cities } = {} } = citiesData;
+
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth() + 1;
 
   if (selectedOption) pullSelectedCity(selectedOption);
 
   const toggling = () => setIsOpen(!isOpen);
+
+  function toMonthName(monthNumber) {
+    const date = new Date();
+    date.setMonth(monthNumber - 1);
+
+    return date.toLocaleString("en-US", {
+      month: "long",
+    });
+  }
 
   const onOptionClicked = (value) => () => {
     setSelectedOption(value);
@@ -18,15 +37,47 @@ export function Dropdown({ citiesData, pullSelectedCity }) {
 
   return (
     <DropDownContainer>
-      <DropDownHeader onClick={toggling}>
+      <DropDownHeader>
         {selectedOption || "Cities"}
+        <Button onClick={toggling}>
+          {isOpen ? (
+            <BiUpArrow
+              style={{
+                color: "white",
+                fontSize: "2rem",
+              }}
+            />
+          ) : (
+            <BiDownArrow
+              style={{
+                color: "white",
+                fontSize: "2rem",
+              }}
+            />
+          )}
+        </Button>
+        <CurrentDate>{`${dd} ${toMonthName(mm)}`}</CurrentDate>
       </DropDownHeader>
+
       {isOpen && (
         <DropDownListContainer>
+          <Button
+            onClick={() => {
+              if (sliceOfCities[0] > 0) {
+                setSliceOfCities((prev) => [prev[0] - 3, prev[1] - 3]);
+              }
+            }}
+          >
+            <BiLeftArrow
+              style={{
+                color: sliceOfCities[0] > 0 ? "white" : "gray",
+                fontSize: "2rem",
+              }}
+            />
+          </Button>
           <DropDownList>
-            <ButtonUp></ButtonUp>
             {citiesData &&
-              cities.slice(0, 10).map((city) => {
+              cities.slice(sliceOfCities[0], sliceOfCities[1]).map((city) => {
                 return (
                   <>
                     <ListItem
@@ -38,8 +89,21 @@ export function Dropdown({ citiesData, pullSelectedCity }) {
                   </>
                 );
               })}
-            <ButtonDown></ButtonDown>
           </DropDownList>
+          <Button
+            onClick={() => {
+              if (sliceOfCities[1] < cities.length) {
+                setSliceOfCities((prev) => [prev[0] + 3, prev[1] + 3]);
+              }
+            }}
+          >
+            <BiRightArrow
+              style={{
+                color: sliceOfCities[1] < cities.length ? "white" : "gray",
+                fontSize: "2rem",
+              }}
+            />
+          </Button>
         </DropDownListContainer>
       )}
     </DropDownContainer>
@@ -47,42 +111,76 @@ export function Dropdown({ citiesData, pullSelectedCity }) {
 }
 
 const DropDownContainer = styled("div")`
-  width: 10.5em;
-  margin: 0 auto;
+  background: transparent;
+  width: 100%;
+  height: 90%;
 `;
 
 const DropDownHeader = styled("div")`
-  margin-bottom: 0.8em;
-  padding: 0.4em 2em 0.4em 1em;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
-  font-weight: 500;
-  font-size: 1.3rem;
-  color: #3faffa;
-  background: #ffffff;
+  padding: 0.5rem 2rem 0.1rem 1.5rem;
+  text-align: start;
+  font-weight: 700;
+  font-size: 3rem;
+  color: white;
+  background: transparent;
+  text-transform: uppercase;
+  backdrop-filter: blur(2px) brightness(0.8);
 `;
 
-const DropDownListContainer = styled("div")``;
+const CurrentDate = styled.h3`
+  color: lightgray;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 1.8rem;
+`;
+
+const DropDownListContainer = styled("div")`
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 0.1rem;
+`;
 
 const DropDownList = styled("ul")`
-  padding: 0;
-  margin: 0;
+  padding: 0.4em 2em 0.4em 1em;
+  margin: 1.5rem 1rem 1rem 1rem;
   padding-left: 1em;
-  background: #ffffff;
-  border: 2px solid #e5e5e5;
+  background: transparent;
   box-sizing: border-box;
-  color: #3faffa;
+  color: white;
   font-size: 1.3rem;
   font-weight: 500;
   &:first-child {
     padding-top: 0.8em;
   }
+  display: grid;
+  grid-template-areas:
+    "1fr 1fr 1fr"
+    "1fr 1fr 1fr"
+    "1fr 1fr 1fr";
+  grid-gap: 2rem;
+  backdrop-filter: blur(2px) brightness(0.8);
 `;
 
-const ButtonUp = styled.button``;
-
-const ButtonDown = styled.button``;
+const Button = styled.button`
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  backdrop-filter: blur(2px) brightness(0.8);
+  margin: 1.5rem 0rem 1rem 0rem;
+`;
 
 const ListItem = styled("li")`
   list-style: none;
   margin-bottom: 0.8em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: white !important;
+  cursor: pointer;
 `;
