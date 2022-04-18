@@ -1,134 +1,106 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { changeLanguage } from "i18next";
-import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Image from "../download.jpeg";
 import useHttp from "../hooks/use-http";
 import ReactCountryFlag from "react-country-flag";
 import { DayComponent } from "./Day";
 import { getWeekday } from "../utils/getWeekday";
-import { useDispatch } from 'react-redux';
+
+import { useDispatch } from "react-redux";
 import { weatherAdded } from "../store2/weatherSlice";
+
+import { Dropdown } from "./Dropdown";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-const Main = () => {
+export const Main = () => {
   const [citiesData, setCitiesData] = useState("");
   const [currentCity, setCurrentCity] = useState("");
-  const [currentCityApiData, setCurrentCityApiData] = useState("");
-  const [currentCityImageData, setCurrentCityImageData] = useState("");
-  const [currentCityCoordinates, setCurrentCityCoordinates] = useState(0);
-  const [weatherData, setWeatherData] = useState("");
-  const { t } = useTranslation();
+  const [imgAndWeatherData, setImgAndWeatherData] = useState("");
   const { sendRequest } = useHttp();
   // REEDUX define dispatch ... i import useDispathc for this and weatherActions for function showWeather
   const dispatch = useDispatch();
 
   //REDUX put weatherData in const
-  let currentWeather = weatherData || "nesto";
+  let currentWeather = imgAndWeatherData.weatherData || "nesto";
 
   // function for REDUX  ...
   const showWeather = () => {
     dispatch(weatherAdded(currentWeather));
   };
 
-  // destructuring cities api data
-  const { _links: { "ua:item": cities } = {} } = citiesData;
+  const pullSelectedCity = (cityName) => {
+    console.log("i pulled city");
+    setCurrentCity(cityName);
+  };
 
+  console.log("rerender");
+
+  async function fetchCities() {
+    const citiesResponse = await sendRequest({
+      url: "https://api.teleport.org/api/urban_areas/",
+    });
+    setCitiesData(citiesResponse);
+  }
   // fetching all the cities with an image
   useEffect(() => {
-    sendRequest(
-      { url: "https://api.teleport.org/api/urban_areas/" },
-      setCitiesData
-    );
-  }, []);
+    if (!citiesData) fetchCities();
+  }, [citiesData]);
 
-  // fetching image and coord data when the new city is selected
-  useEffect(() => {
-    const { _links: { "ua:images": imageData } = {} } = currentCityApiData;
+  async function fetchImgAndWeatherData() {
+    const currCityApiData = await sendRequest({
+      url: `https://api.teleport.org/api/urban_areas/slug:${currentCity
+        .split(" ")
+        .join("-")
+        .toLowerCase()}/`,
+    });
+    const { _links: { "ua:images": imageData } = {} } = currCityApiData;
     const { _links: { "ua:identifying-city": coordinatesData } = {} } =
-      currentCityApiData;
-    if (currentCityApiData) {
-      sendRequest({ url: imageData.href }, setCurrentCityImageData);
-      sendRequest({ url: coordinatesData.href }, setCurrentCityCoordinates);
-    }
-  }, [currentCityApiData]);
+      currCityApiData;
 
-  // fetching the 7 day forecast
+    const imgResponse = await sendRequest({ url: imageData.href });
+    const coordsResponse = await sendRequest({ url: coordinatesData.href });
+    const {
+      location: { latlon: { latitude: lat, longitude: lon } = {} },
+    } = coordsResponse;
+    const weatherDataResponse = await sendRequest({
+      url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`,
+    });
+    setImgAndWeatherData({
+      imgData: imgResponse,
+      weatherData: weatherDataResponse,
+    });
+  }
+
   useEffect(() => {
-    if (currentCityCoordinates) {
-      const {
-        location: { latlon: { latitude: lat, longitude: lon } = {} },
-      } = currentCityCoordinates;
-      sendRequest(
-        {
-          url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`,
-        },
-        setWeatherData
-      );
+    fetchImgAndWeatherData();
+  }, [currentCity]);
 
-      currentWeather = weatherData;
-    }
-  }, [currentCityCoordinates]);
-
-  //REDUX ...
   useEffect(() => {
-    if (weatherData) {
+    if (imgAndWeatherData) {
       showWeather();
     }
-  }, [weatherData]);
-
-  console.log(currentCityApiData);
-  console.log(currentCityCoordinates);
-
-  // console.log(currentCityImageData.photos[0].image.mobile);
-  console.log(weatherData, "WEATHER DATA");
+  }, [imgAndWeatherData]);
 
   // from currentCityApiData
   const backgroundImage =
-    currentCityImageData && currentCityImageData.photos[0].image.mobile;
-
-  if (weatherData) console.log(weatherData.daily.slice(0, -1), "PRIKAZI");
+    imgAndWeatherData && imgAndWeatherData.imgData.photos[0].image.mobile;
 
   return (
     <MainWrapper image={backgroundImage ? backgroundImage : Image}>
-      <ChooseCity>
-        <ChooseCityDropdown
-          name="cities"
-          id="city"
-          value={currentCity}
-          onChange={(event) => {
-            setCurrentCity(event.target.value);
-            sendRequest(
-              {
-                url: `https://api.teleport.org/api/urban_areas/slug:${event.target.value.toLowerCase()}/`,
-              },
-              setCurrentCityApiData
-            );
-          }}
-        >
-          <option value="Cities" hidden>
-            Cities
-          </option>
-          {citiesData &&
-            cities.map((city, key) => {
-              return (
-                <DropdownOption key={key} value={city.name}>
-                  {city.name}
-                </DropdownOption>
-              );
-            })}
-        </ChooseCityDropdown>
-        <Button right="0;" onClick={() => changeLanguage("en")}>
-          <ReactCountryFlag countryCode="GB" />
-        </Button>
-        <Button right="2rem;" onClick={() => changeLanguage("sr")}>
-          <ReactCountryFlag countryCode="RS" />
-        </Button>
-      </ChooseCity>
+      <Dropdown citiesData={citiesData} pullSelectedCity={pullSelectedCity} />
+
+      <Button right="0;" onClick={() => changeLanguage("en")}>
+        <ReactCountryFlag countryCode="GB" />
+      </Button>
+      <Button right="2rem;" onClick={() => changeLanguage("sr")}>
+        <ReactCountryFlag countryCode="RS" />
+      </Button>
+
       <SevenDays>
-        {weatherData &&
-          weatherData.daily.slice(0, -1).map((day, key) => {
+        {imgAndWeatherData &&
+          imgAndWeatherData.weatherData.daily.slice(0, -1).map((day, key) => {
             const date = new Date(day.dt * 1000);
             const weekdayNum = date.getDay();
 
@@ -143,12 +115,12 @@ const Main = () => {
           })}
       </SevenDays>
       <SevenDaysNames>
-        {weatherData &&
-          weatherData.daily.slice(0, -1).map((day, key) => {
+        {imgAndWeatherData &&
+          imgAndWeatherData.weatherData.daily.slice(0, -1).map((day, key) => {
             const date = new Date(day.dt * 1000);
             const weekdayNum = date.getDay();
 
-            return <DayName>{getWeekday(weekdayNum)}</DayName>;
+            return <DayName key={key}>{getWeekday(weekdayNum)}</DayName>;
           })}
       </SevenDaysNames>
     </MainWrapper>
@@ -176,42 +148,6 @@ const MainWrapper = styled.div`
     background-color: pink;
     margin: 0.5rem;
   }
-`;
-
-const ChooseCity = styled.div`
-  height: 30%;
-  width: 25%;
-  padding-left: 2rem;
-  padding-top: 2rem;
-  p {
-    font-size: 2.5rem;
-    margin-left: 1rem;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-`;
-
-const ChooseCityDropdown = styled.select`
-  background-color: transparent;
-  background-repeat: no-repeat;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
-  font-size: 2.3rem;
-  color: white;
-  font-weight: 700;
-  text-transform: uppercase;
-`;
-
-const DropdownOption = styled.option`
-  color: black;
-  background: white;
-  display: flex;
-  white-space: pre;
-  min-height: 20px;
-  padding: 0px 2px 1px;
 `;
 
 const SevenDays = styled.div`
@@ -263,5 +199,3 @@ const Button = styled.button`
   overflow: hidden;
   outline: none;
 `;
-
-export default Main;

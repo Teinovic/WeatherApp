@@ -30,12 +30,14 @@ const Day = styled.div`
   :hover {
     {   
         transform-origin: bottom center;
-        -webkit-transform: scale(1, 1.2);
-        -ms-transform: scale(1, 1.2);
-        transform: scale(1, 1.2);
-        transition: 1s ease;
-        cursor: circle;
+        -webkit-transform: scale(1, 1.1);
+        -ms-transform: scale(1, 1.1);
+        transform: scale(1, 1.1);
+        transition: all 0.6s ease-in-out;
+        filter: brightness(2);
   }
+  :not(:hover) {   
+   } 
 `;
 
 const TemperatureNum = styled.p`
