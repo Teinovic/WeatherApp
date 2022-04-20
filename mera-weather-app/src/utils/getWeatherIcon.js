@@ -5,14 +5,17 @@ import {
   WiSnow,
   WiDaySunny,
   WiCloud,
+  WiDayHaze,
+  WiFog
 } from "react-icons/wi";
+
 
 export function WeatherIcon({ typeOfWeather }) {
   switch (typeOfWeather) {
     case "Thunderstorm":
       return <WiThunderstorm />;
     case "Drizzle":
-      return "https://openweathermap.org/img/wn/09d.png";
+      return <WiRain />;
     case "Rain":
       return <WiRain />;
     case "Snow":
@@ -21,6 +24,10 @@ export function WeatherIcon({ typeOfWeather }) {
       return <WiDaySunny />;
     case "Clouds":
       return <WiCloud />;
+      case "Haze":
+        return <WiDayHaze/>;
+      case "Fog":
+        return <WiFog/>;
     default:
       return <p>no img found</p>;
   }
