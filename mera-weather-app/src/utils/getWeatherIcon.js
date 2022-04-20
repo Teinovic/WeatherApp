@@ -5,7 +5,8 @@ import {
   WiSnow,
   WiDaySunny,
   WiCloud,
-  WiDayHaze
+  WiDayHaze,
+  WiFog
 } from "react-icons/wi";
 
 
@@ -23,8 +24,10 @@ export function WeatherIcon({ typeOfWeather }) {
       return <WiDaySunny />;
     case "Clouds":
       return <WiCloud />;
-    case "Haze":
-      return <WiDayHaze/>
+      case "Haze":
+        return <WiDayHaze/>;
+      case "Fog":
+        return <WiFog/>;
     default:
       return <p>no img found</p>;
   }
