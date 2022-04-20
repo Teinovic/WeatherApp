@@ -1,46 +1,114 @@
-import React,{useState} from "react";
-import styled,{keyframes} from 'styled-components';
+import React, { useState,useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 import { FaRedoAlt } from "react-icons/fa";
-import { BsSun } from "react-icons/bs";
-import { useTranslation } from "react-i18next";
+import { getWeatherIcon } from "../utils/getWeatherIcon";
 import { useSelector } from "react-redux";
-
+// English.
+//redux
+import { useDispatch } from "react-redux";
+import { weatherAdded } from "../store2/weatherSlice";
+import { time_ago } from "../hooks/time";
 
 const DayWeather = () => {
-  const { t } = useTranslation();
   const [active, setActive] = useState(false);
-  // for temperature
-  const weather = useSelector((state)=> state.weather.slice(-1));
+  const [clicked, setClicked] = useState("Click the button");
+  // for temperature form REDUX
+  const weatherData = useSelector((state) => state.weather);
 
+  const { lat, lon } = weatherData;
+  const dispatch = useDispatch();
+  // for fetching on click update btn
+  const API_KEY = process.env.REACT_APP_API_KEY;
+  // for fetching
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  let resultFetching = null;
+  // for update btn
+  let timeInterval = null;
+  let interval = null;
+  //useEffect for clearing interval  and setInt every (now 3 sec but should be 1min ... later)
+  useEffect(() => {
+    console.log('interval u useEffect', interval)
+    if (active) {
+    interval = 1;
+    //set interval for a minute ago with export function time_ago ...
+    timeInterval = setInterval(() => {
+      console.log('interval u timu', interval)
 
-  // function for button update and animation rotate
+      let minutica = 60 * 1000 * interval;
+      
+      console.log(time_ago(new Date(Date.now() - minutica)));
+      setClicked(`Updated ${time_ago(new Date(Date.now() - minutica))}`);
+      interval++;
+      if (interval === 7) {
+        clearInterval(timeInterval);
+        setClicked("Click the button");
+      }
+    }, 3000);
+  }
+
+    return (() => {
+      clearInterval(timeInterval)
+  })
+  }, [active]);
+  
+  // FUNCTION for button update and animation rotate
   const updateState = () => {
+    // chenge the p when you click on btn
+    setClicked("Updated a few seconds");
+    // FOR BUTTON ANIMATION
     setInterval(() => {
       if (!active) setActive(true);
     }, 200);
 
-    clearInterval(setInterval);
-
+    //FOR FETCHING THE DATA
+    //fetch data again for this citi ... with lat and lon from redux
+    fetch(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then(
+        (result) => {
+          setData(result);
+          resultFetching = result;
+          setLoading(false);
+          showWeather();
+        },
+        (error) => {
+          setError(error);
+          console.error("Error Fetching the Data", error);
+        }
+      );
+    // function for REDUX  ...
+    const showWeather = () => {
+      dispatch(weatherAdded(resultFetching));
+    };
     setActive(false);
   };
-  
+
   return (
     <DayWrapper>
       <DayInfo>
         <Temperature>
           {/* round number for temp  */}
-          <h4>{Math.round(weather[0].current.temp)}&#176;</h4>
-          <p>{t("Description")}</p>
+          <h4>{Math.round(weatherData.current.temp)}&#176;</h4>
+          <p>{weatherData?.current?.weather[0].main}</p>
+          {/* <p>{t("Description")}</p> */}
         </Temperature>
-        <AnimationDiv>
-        <BsSun size={80} />
-        </AnimationDiv>
+        <MyIcon
+          src={getWeatherIcon(weatherData?.current?.weather[0].main)}
+          alt={weatherData?.current.weather[0].main}
+        />
       </DayInfo>
       <RefreshContainer>
-      <RefreshButton active={active} onClick={updateState}>
+        <RefreshButton active={active} onClick={updateState}>
           <FaRedoAlt />
         </RefreshButton>
-        <UpdatedInfo>{t("Updated")}</UpdatedInfo>
+        {/* <UpdatedInfo>{t("Updated")}</UpdatedInfo> */}
+        <UpdatedInfo>{`${clicked}`}</UpdatedInfo>
       </RefreshContainer>
     </DayWrapper>
   );
@@ -112,6 +180,14 @@ const rotate = keyframes`
 const AnimationDiv = styled.div`
   animation: ${rotate} infinite 20s linear;
 `;
+const MyIcon = styled.img`
+  width: 6rem;
+`;
+
+MyIcon.defaultProps = {
+  src: "01d.png",
+  alt: "weather",
+};
 
 const RefreshContainer = styled.div`
   display: flex;
@@ -125,7 +201,7 @@ const RefreshButton = styled.button`
   color: white;
   background-color: transparent;
   animation-duration: 0.2s;
-  animation-name: ${props => (props.active ? rotate : "")};
+  animation-name: ${(props) => (props.active ? rotate : "")};
   outline: none;
   border: none;
   margin-right: 1rem;

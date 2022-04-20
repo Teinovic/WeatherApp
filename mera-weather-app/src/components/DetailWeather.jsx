@@ -6,25 +6,25 @@ import { useSelector } from "react-redux";
 const DetailWeather = () => {
   const { t } = useTranslation();
   // for hum,pres,and all ... last item from arr ... 
-  const weather = useSelector((state)=> state.weather.slice(-1));
+  const weatherData = useSelector(state => state.weather);
   
   return (
     <Suspense>
       <DetailWrapper>
         <Humidity>
-          <h3>{weather[0].current.humidity}%</h3>
+          <h3>{weatherData.current.humidity}%</h3>
           <h4>{t("Humidity")}</h4>
         </Humidity>
         <AirPollution>
-          <h3>{weather[0].current.dew_point}&#176;</h3>
+          <h3>{weatherData.current.dew_point}&#176;</h3>
           <h4>{t("Dew. Pt.")}</h4>
         </AirPollution>
         <UvIndex>
-          <h3>{weather[0].current.uvi}</h3>
+          <h3>{Math.round(weatherData.current.uvi)}/10</h3>
           <h4>{t("UV Index")}</h4>
         </UvIndex>
         <Visibility>
-          <h3>{weather[0].current.pressure}km</h3>
+          <h3>{weatherData.current.visibility}km</h3>
           <h4>{t("Visibility")}</h4>
         </Visibility>
       </DetailWrapper>
