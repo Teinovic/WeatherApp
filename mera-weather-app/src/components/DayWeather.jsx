@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { weatherAdded } from "../store2/weatherSlice";
 import { time_ago } from "../hooks/time";
-import { IconContext } from "react-icons/lib";
 
 
 const DayWeather = () => {

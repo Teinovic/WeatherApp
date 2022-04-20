@@ -16,8 +16,8 @@ const initialState = {
         icon: "01d"
       }]
     },
-    lat: 0,
-    lon: 0,
+    lat: 44.804,
+    lon: 20.4651,
     timezone: "nista"
   };
 
