@@ -21,16 +21,18 @@ const Day = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  border-right: 0.02px solid white;
-  backdrop-filter: blur(8px);
   background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
   :hover {
     {   
         transform-origin: bottom center;
         -webkit-transform: scale(1, 1.1);
         -ms-transform: scale(1, 1.1);
         transform: scale(1, 1.1);
-        transition: all 0.6s ease-in-out;
+        
+        transition: all 0.4s ease-in-out;
+      
+
 `;
 
 const TemperatureNum = styled.p`

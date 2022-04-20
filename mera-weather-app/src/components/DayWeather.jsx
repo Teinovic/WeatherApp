@@ -71,9 +71,9 @@ const DayWrapper = styled.div`
     margin-bottom: 0rem;
   }
   @media (min-width: 768px) and (max-width: 1100px) {
-    width: 50%;
-    height: 30vh;
-    margin: 0.5rem;
+    max-height: 100%;
+    margin: 1rem 0.5rem 0 0;
+
   }
 `;
 

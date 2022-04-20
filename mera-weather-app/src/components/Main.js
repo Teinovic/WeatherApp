@@ -3,7 +3,7 @@ import { changeLanguage } from "i18next";
 import styled from "styled-components";
 import Image from "../download.jpeg";
 import useHttp from "../hooks/use-http";
-import ReactCountryFlag from "react-country-flag";
+
 import { DayComponent } from "./Day";
 import { getWeekday } from "../utils/getWeekday";
 
@@ -18,6 +18,7 @@ export const Main = () => {
   const [citiesData, setCitiesData] = useState("");
   const [currentCity, setCurrentCity] = useState("");
   const [imgAndWeatherData, setImgAndWeatherData] = useState("");
+  const [language, setLanguage] = useState("en");
   const { sendRequest } = useHttp();
   // REEDUX define dispatch ... i import useDispathc for this and weatherActions for function showWeather
   const dispatch = useDispatch();
@@ -90,27 +91,26 @@ export const Main = () => {
   return (
     <MainWrapper image={backgroundImage ? backgroundImage : Image}>
       <Dropdown citiesData={citiesData} pullSelectedCity={pullSelectedCity} />
-
-      <ButtonContainer>
-        <Button right="0;" onClick={() => changeLanguage("en")}>
-          <ReactCountryFlag
-            countryCode="GB"
-            style={{
-              fontSize: "1.5em",
-              lineHeight: "1.5em",
-            }}
-          />
-        </Button>
-        <Button right="2rem;" onClick={() => changeLanguage("sr")}>
-          <ReactCountryFlag
-            countryCode="RS"
-            style={{
-              fontSize: "1.5em",
-              lineHeight: "1.5em",
-            }}
-          />
-        </Button>
-      </ButtonContainer>
+      <LanguageWrapper>
+        <OptionEnglish
+          onClick={() => {
+            changeLanguage("en");
+            setLanguage("en");
+          }}
+          style={{ fontSize: language === "en" && "1rem" }}
+        >
+          English
+        </OptionEnglish>
+        <OptionSerbian
+          onClick={() => {
+            changeLanguage("sr");
+            setLanguage("sr");
+          }}
+          style={{ fontSize: language === "sr" && "1rem" }}
+        >
+          Srpski
+        </OptionSerbian>
+      </LanguageWrapper>
 
       <SevenDays>
         {imgAndWeatherData &&
@@ -160,7 +160,6 @@ const MainWrapper = styled.div`
     width: 100%;
     height: 70vh;
     background-color: pink;
-    margin: 0.5rem;
   }
 `;
 
@@ -168,9 +167,6 @@ const SevenDays = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   color: white;
-  div:last-child {
-    border-right: 0;
-  }
 `;
 
 const SevenDaysNames = styled.div`
@@ -178,9 +174,6 @@ const SevenDaysNames = styled.div`
   grid-template-columns: repeat(7, 1fr);
 
   color: white;
-  p:last-child {
-    border-right: 0;
-  }
 `;
 
 const DayName = styled.p`
@@ -191,7 +184,6 @@ const DayName = styled.p`
   padding-top: 0.5vh;
   align-items: center;
   justify-content: space-around;
-  border-right: 0.02px solid white;
   backdrop-filter: blur(8px);
   background-color: rgba(255, 255, 255, 0.2);
   font-size: 0.8rem;
@@ -199,10 +191,30 @@ const DayName = styled.p`
   font-weight: 500;
 `;
 
-const ButtonContainer = styled.div`
+const LanguageWrapper = styled.div`
   position: absolute;
-  top: 0;
+  top: 0.5rem;
   right: 0.5rem;
+`;
+
+const OptionEnglish = styled.button`
+  color: white;
+  font-size: 0.8rem;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+`;
+const OptionSerbian = styled.button`
+  color: white;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
 `;
 
 const Button = styled.button`

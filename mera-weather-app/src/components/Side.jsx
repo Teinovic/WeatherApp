@@ -30,6 +30,7 @@ const SideWrapper = styled.div`
     
     flex-direction: row;
     margin-right: 0rem;
+    justify-content: space-between;
 
   }
 `;

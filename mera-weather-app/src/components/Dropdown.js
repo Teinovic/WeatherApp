@@ -113,7 +113,9 @@ export function Dropdown({ citiesData, pullSelectedCity }) {
 const DropDownContainer = styled("div")`
   background: transparent;
   width: 100%;
+
   height: 90%;
+  max-height: 90%;
 `;
 
 const DropDownHeader = styled("div")`
@@ -145,23 +147,19 @@ const DropDownListContainer = styled("div")`
 `;
 
 const DropDownList = styled("ul")`
-  padding: 0.4em 2em 0.4em 1em;
-  margin: 1.5rem 1rem 1rem 1rem;
-  padding-left: 1em;
   background: transparent;
   box-sizing: border-box;
+  list-style: none;
   color: white;
   font-size: 1.3rem;
   font-weight: 500;
-  &:first-child {
-    padding-top: 0.8em;
-  }
   display: grid;
+  padding-right: 3rem;
   grid-template-areas:
-    "1fr 1fr 1fr"
-    "1fr 1fr 1fr"
-    "1fr 1fr 1fr";
-  grid-gap: 2rem;
+    "33vw 33vw 33vw"
+    "33vw 33vw 33vw"
+    "33vw 33vw 33vw";
+  grid-gap: 1rem;
   backdrop-filter: blur(2px) brightness(0.8);
 `;
 
@@ -173,12 +171,12 @@ const Button = styled.button`
   overflow: hidden;
   outline: none;
   backdrop-filter: blur(2px) brightness(0.8);
-  margin: 1.5rem 0rem 1rem 0rem;
+  margin: 1.5rem 0rem 1.5rem 0rem;
 `;
 
 const ListItem = styled("li")`
   list-style: none;
-  margin-bottom: 0.8em;
+
   text-transform: uppercase;
   font-weight: 700;
   color: white !important;
