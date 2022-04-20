@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { FaRedoAlt } from "react-icons/fa";
 import { WeatherIcon } from "../utils/getWeatherIcon";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 // English.
 //redux
 import { useDispatch } from "react-redux";
@@ -11,6 +12,7 @@ import { time_ago } from "../hooks/time";
 
 
 const DayWeather = () => {
+  const { t } = useTranslation();
   const [active, setActive] = useState(false);
   const [clicked, setClicked] = useState("Click the button");
   // for temperature form REDUX
@@ -96,14 +98,14 @@ const DayWeather = () => {
         <Temperature>
           {/* round number for temp  */}
           <h4>{Math.round(weatherData.current.temp)}&#176;</h4>
-          <p>{weatherData?.current?.weather[0].main}</p>
+          <p>{t(weatherData?.current?.weather[0].main)}</p>
           {/* <p>{t("Description")}</p> */}
         </Temperature>
         {/* <MyIcon
           src={getWeatherIcon(weatherData?.current?.weather[0].main)}
           alt={weatherData?.current.weather[0].main}
         /> */}
-       <IconContext.Provider value={{ size: 42 }}>
+       <IconContext.Provider value={{ size: 80 }}>
           <WeatherIcon typeOfWeather={weatherData?.current?.weather[0].main} />
         </IconContext.Provider>
       </DayInfo>
