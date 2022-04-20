@@ -1,13 +1,15 @@
 import React, { useState,useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { FaRedoAlt } from "react-icons/fa";
-import { getWeatherIcon } from "../utils/getWeatherIcon";
+import { WeatherIcon } from "../utils/getWeatherIcon";
 import { useSelector } from "react-redux";
 // English.
 //redux
 import { useDispatch } from "react-redux";
 import { weatherAdded } from "../store2/weatherSlice";
 import { time_ago } from "../hooks/time";
+import { IconContext } from "react-icons/lib";
+
 
 const DayWeather = () => {
   const [active, setActive] = useState(false);
@@ -98,10 +100,13 @@ const DayWeather = () => {
           <p>{weatherData?.current?.weather[0].main}</p>
           {/* <p>{t("Description")}</p> */}
         </Temperature>
-        <MyIcon
+        {/* <MyIcon
           src={getWeatherIcon(weatherData?.current?.weather[0].main)}
           alt={weatherData?.current.weather[0].main}
-        />
+        /> */}
+       <IconContext.Provider value={{ size: 42 }}>
+          <WeatherIcon typeOfWeather={weatherData?.current?.weather[0].main} />
+        </IconContext.Provider>
       </DayInfo>
       <RefreshContainer>
         <RefreshButton active={active} onClick={updateState}>
@@ -139,9 +144,9 @@ const DayWrapper = styled.div`
     margin-bottom: 0rem;
   }
   @media (min-width: 768px) and (max-width: 1100px) {
-    max-height: 100%;
-    margin: 1rem 0.5rem 0 0;
-
+    width: 50%;
+    height: 30vh;
+    margin: 0.5rem;
   }
 `;
 
@@ -180,14 +185,18 @@ const rotate = keyframes`
 const AnimationDiv = styled.div`
   animation: ${rotate} infinite 20s linear;
 `;
-const MyIcon = styled.img`
-  width: 6rem;
-`;
+// const MyIcon = styled.img`
+//   width: 6rem;
+// `;
 
-MyIcon.defaultProps = {
-  src: "01d.png",
-  alt: "weather",
-};
+// MyIcon.defaultProps = {
+//   src: "01d.png",
+//   alt: "weather",
+// };
+
+const MyIcon = styled.div`
+  width: 6rem;
+`
 
 const RefreshContainer = styled.div`
   display: flex;
