@@ -9,6 +9,8 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { weatherAdded } from "../store2/weatherSlice";
 import { time_ago } from "../hooks/time";
+import { IconContext } from "react-icons/lib";
+import { BiFontSize } from "react-icons/bi";
 
 
 const DayWeather = () => {
@@ -53,6 +55,7 @@ const DayWeather = () => {
 
     return (() => {
       clearInterval(timeInterval)
+      
   })
   }, [active]);
   
@@ -105,7 +108,7 @@ const DayWeather = () => {
           src={getWeatherIcon(weatherData?.current?.weather[0].main)}
           alt={weatherData?.current.weather[0].main}
         /> */}
-       <IconContext.Provider value={{ size: 80 }}>
+       <IconContext.Provider value={{ size: window.innerWidth > 500 ? 80 : 30 }}>
           <WeatherIcon typeOfWeather={weatherData?.current?.weather[0].main} />
         </IconContext.Provider>
       </DayInfo>
@@ -141,13 +144,14 @@ const DayWrapper = styled.div`
 
   @media (max-width: 767px) {
     width: 100%;
-    height: 50vh;
+    height: 25vh;
     margin-bottom: 0rem;
+  
+
   }
   @media (min-width: 768px) and (max-width: 1100px) {
-    width: 50%;
-    height: 30vh;
-    margin: 0.5rem;
+    max-height: 100%;
+    margin: 1rem 0.5rem 0 0;
   }
 `;
 
@@ -156,6 +160,10 @@ const DayInfo = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   padding: 3rem 2rem 0rem 2rem;
+
+  @media (max-width: 767px) {
+    padding: 2rem 0.2rem 0rem 1rem;
+  }
 `;
 
 const Temperature = styled.div`
@@ -166,12 +174,22 @@ const Temperature = styled.div`
   h4 {
     font-size: 4rem;
     margin: 0;
+
+    @media (max-width: 767px) {
+      font-size: 1.5rem;
+    }
   }
   p {
     font-size: 1.5rem;
     font-weight: bold;
     margin: 0;
+
+    @media (max-width: 767px) {
+      font-size: 1rem;
+    }
   }
+
+  
 `;
 
 const rotate = keyframes`
@@ -204,6 +222,8 @@ const RefreshContainer = styled.div`
   align-items: flex-end;
   justify-content: flex-start;
   padding: 0rem 0rem 1rem 2rem;
+
+  
 `;
 const RefreshButton = styled.button`
   cursor: pointer;
@@ -215,6 +235,11 @@ const RefreshButton = styled.button`
   outline: none;
   border: none;
   margin-right: 1rem;
+
+  @media (max-width: 767px) {
+    margin-right: 0.1rem;
+    font-size: 0.7rem;
+  }
 `;
 
 const UpdatedInfo = styled.span`
@@ -223,6 +248,10 @@ const UpdatedInfo = styled.span`
   color: white;
   letter-spacing: 0.2;
   margin: 0;
+  @media (max-width: 767px) {
+    font-size: 0.8rem;
+    
+  }
 `;
 
 export default DayWeather;

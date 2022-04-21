@@ -7,7 +7,8 @@ export const WeatherContainer = styled.div`
 
   @media (max-width: 767px) {
     width: 100%;
-    height: 200vh;
+    height: 118vh;
+    max-height: 118vh;
     background-color: green;
     flex-direction: column-reverse;
   }
