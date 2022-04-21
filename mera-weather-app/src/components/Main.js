@@ -154,6 +154,7 @@ const MainWrapper = styled.div`
   @media (max-width: 767px) {
     width: 100%;
     height: 100vh;
+    max-height: 100vh;
     background-color: green;
   }
   @media (min-width: 768px) and (max-width: 1100px) {
@@ -189,6 +190,10 @@ const DayName = styled.p`
   font-size: 0.8rem;
   text-transform: uppercase;
   font-weight: 500;
+
+  @media (max-width: 767px) {
+    font-size: 0.6rem;
+  }
 `;
 
 const LanguageWrapper = styled.div`

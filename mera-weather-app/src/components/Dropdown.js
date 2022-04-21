@@ -44,14 +44,14 @@ export function Dropdown({ citiesData, pullSelectedCity }) {
             <BiUpArrow
               style={{
                 color: "white",
-                fontSize: "2rem",
+                fontSize: window.innerWidth > 767 ? "2rem" : "1.3rem",
               }}
             />
           ) : (
             <BiDownArrow
               style={{
                 color: "white",
-                fontSize: "2rem",
+                fontSize: window.innerWidth > 767 ? "2rem" : "1.3rem",
               }}
             />
           )}
@@ -71,7 +71,7 @@ export function Dropdown({ citiesData, pullSelectedCity }) {
             <BiLeftArrow
               style={{
                 color: sliceOfCities[0] > 0 ? "white" : "gray",
-                fontSize: "2rem",
+                fontSize: window.innerWidth > 767 ? "2rem" : "0.7rem",
               }}
             />
           </Button>
@@ -100,7 +100,7 @@ export function Dropdown({ citiesData, pullSelectedCity }) {
             <BiRightArrow
               style={{
                 color: sliceOfCities[1] < cities.length ? "white" : "gray",
-                fontSize: "2rem",
+                fontSize: window.innerWidth > 767 ? "2rem" : "0.7rem",
               }}
             />
           </Button>
@@ -127,6 +127,11 @@ const DropDownHeader = styled("div")`
   background: transparent;
   text-transform: uppercase;
   backdrop-filter: blur(2px) brightness(0.8);
+
+  @media (max-width: 767px) {
+    font-size: 1.7rem;
+    padding-top: 2rem;
+  }
 `;
 
 const CurrentDate = styled.h3`
@@ -136,6 +141,10 @@ const CurrentDate = styled.h3`
   padding: 0;
   font-weight: 500;
   font-size: 1.8rem;
+
+  @media (max-width: 767px) {
+    font-size: 1.3rem;
+  }
 `;
 
 const DropDownListContainer = styled("div")`
@@ -161,6 +170,14 @@ const DropDownList = styled("ul")`
     "33vw 33vw 33vw";
   grid-gap: 1rem;
   backdrop-filter: blur(2px) brightness(0.8);
+
+  @media (max-width: 767px) {
+    font-size: 0.6rem;
+    grid-template-areas:
+      "1fr 1fr"
+      "1fr 1fr";
+    padding: 0;
+  }
 `;
 
 const Button = styled.button`

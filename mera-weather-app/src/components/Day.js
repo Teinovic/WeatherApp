@@ -7,7 +7,9 @@ export function DayComponent({ keyProp, maxTemp, typeOfWeather }) {
   return (
     <>
       <Day key={keyProp}>
-        <IconContext.Provider value={{ size: 42 }}>
+        <IconContext.Provider
+          value={{ size: window.innerWidth > 767 ? 42 : 22 }}
+        >
           <WeatherIcon typeOfWeather={typeOfWeather} />
         </IconContext.Provider>
         <TemperatureNum>{Math.round(maxTemp)}°</TemperatureNum>
@@ -37,4 +39,8 @@ const Day = styled.div`
 
 const TemperatureNum = styled.p`
   font-size: 1.6rem;
+
+  @media (max-width: 767px) {
+    font-size: 1rem;
+  }
 `;
