@@ -154,7 +154,7 @@ const MainWrapper = styled.div`
   @media (max-width: 767px) {
     width: 100%;
     height: 100vh;
-    max-height: 100vh;
+    // max-height: 100vh;
     background-color: green;
   }
   @media (min-width: 768px) and (max-width: 1100px) {

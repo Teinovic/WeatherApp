@@ -58,7 +58,7 @@ const DetailWrapper = styled.div`
     font-size: 1.7rem;
 
     @media (max-width: 767px) {
-      font-size: 1rem;
+      font-size: 2rem;
       
       
     }
@@ -71,7 +71,7 @@ const DetailWrapper = styled.div`
     font-size: 1rem;
 
     @media (max-width: 767px) {
-      font-size: 0.8rem;
+      font-size: 1.5rem;
       
       
     }
