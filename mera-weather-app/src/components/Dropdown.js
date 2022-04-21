@@ -172,11 +172,17 @@ const DropDownList = styled("ul")`
   backdrop-filter: blur(2px) brightness(0.8);
 
   @media (max-width: 767px) {
-    font-size: 0.6rem;
+    font-size: 1rem;
     grid-template-areas:
       "1fr 1fr"
       "1fr 1fr";
     padding: 0;
+    height: 50vh;
+    width: 80%;
+
+    li {
+      text-align: center;
+    }
   }
 `;
 
