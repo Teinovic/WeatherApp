@@ -56,6 +56,12 @@ const DetailWrapper = styled.div`
     margin: 0;
     font-weight: 600;
     font-size: 1.7rem;
+
+    @media (max-width: 767px) {
+      font-size: 1rem;
+      
+      
+    }
   }
 
   h4 {
@@ -63,6 +69,12 @@ const DetailWrapper = styled.div`
     margin: 0;
     font-weight: 300;
     font-size: 1rem;
+
+    @media (max-width: 767px) {
+      font-size: 0.8rem;
+      
+      
+    }
   }
 
   @media (max-width: 767px) {
@@ -83,6 +95,8 @@ const Humidity = styled.div`
   flex-direction: column;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
   text-align: center;
+
+
 `;
 
 const AirPollution = styled.div`
@@ -92,6 +106,7 @@ const AirPollution = styled.div`
   flex-direction: column;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
   text-align: center;
+
 `;
 
 const UvIndex = styled.div`
