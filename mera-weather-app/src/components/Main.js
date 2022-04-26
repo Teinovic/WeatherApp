@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { weatherAdded } from "../store2/weatherSlice";
 
 import { Dropdown } from "./Dropdown";
+import { NewDropdown } from "./NewDropdown";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -90,7 +91,10 @@ export const Main = () => {
 
   return (
     <MainWrapper image={backgroundImage ? backgroundImage : Image}>
-      <Dropdown citiesData={citiesData} pullSelectedCity={pullSelectedCity} />
+      <NewDropdown
+        citiesData={citiesData}
+        pullSelectedCity={pullSelectedCity}
+      />
       <LanguageWrapper>
         <OptionEnglish
           onClick={() => {
