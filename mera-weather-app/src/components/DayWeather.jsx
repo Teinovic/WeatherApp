@@ -13,7 +13,7 @@ import { IconContext } from "react-icons/lib";
 
 const DayWeather = () => {
   const [active, setActive] = useState(false);
-  const [clicked, setClicked] = useState("Click the button");
+  const [clicked, setClicked] = useState("Update");
   // for temperature form REDUX
   const weatherData = useSelector((state) => state.weather);
 
@@ -32,7 +32,8 @@ const DayWeather = () => {
   //useEffect for clearing interval  and setInt every (now 3 sec but should be 1min ... later)
   useEffect(() => {
     console.log('interval u useEffect', interval)
-    if (active) {
+    setClicked("Updated a few seconds ago ...")
+    //if (active) {
     interval = 1;
     //set interval for a minute ago with export function time_ago ...
     timeInterval = setInterval(() => {
@@ -43,17 +44,18 @@ const DayWeather = () => {
       console.log(time_ago(new Date(Date.now() - minutica)));
       setClicked(`Updated ${time_ago(new Date(Date.now() - minutica))}`);
       interval++;
-      if (interval === 7) {
+      if (interval === 11) {
+        updateState();
         clearInterval(timeInterval);
-        setClicked("Click the button");
+        setClicked("Update");
       }
-    }, 3000);
-  }
+    }, 60000);
+  //}
 
     return (() => {
       clearInterval(timeInterval)
   })
-  }, [active]);
+  }, [active,weatherData]);
   
   // FUNCTION for button update and animation rotate
   const updateState = () => {
@@ -104,7 +106,7 @@ const DayWeather = () => {
           src={getWeatherIcon(weatherData?.current?.weather[0].main)}
           alt={weatherData?.current.weather[0].main}
         /> */}
-       <IconContext.Provider value={{ size: 42 }}>
+       <IconContext.Provider value={{ size: 80 }}>
           <WeatherIcon typeOfWeather={weatherData?.current?.weather[0].main} />
         </IconContext.Provider>
       </DayInfo>
