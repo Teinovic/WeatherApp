@@ -7,6 +7,7 @@ const DetailWeather = () => {
   const { t } = useTranslation();
   // for hum,pres,and all ... last item from arr ... 
   const weatherData = useSelector(state => state.weather);
+  console.log('weatherData', weatherData);
   
   return (
     <Suspense>
@@ -24,7 +25,7 @@ const DetailWeather = () => {
           <h4>{t("UV Index")}</h4>
         </UvIndex>
         <Visibility>
-          <h3>{weatherData.current.visibility}km</h3>
+          <h3>{Math.round(weatherData.current.visibility/1000)}km</h3>
           <h4>{t("Visibility")}</h4>
         </Visibility>
       </DetailWrapper>
