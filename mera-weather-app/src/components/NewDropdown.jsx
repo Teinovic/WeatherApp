@@ -6,7 +6,18 @@ export const NewDropdown = ({ citiesData, pullSelectedCity }) => {
   const [selectedCity, setSelectedCity] = useState("");
   const { _links: { "ua:item": cities } = {} } = citiesData;
 
-  console.log(selectedCity, "aaa");
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth() + 1;
+
+  function toMonthName(monthNumber) {
+    const date = new Date();
+    date.setMonth(monthNumber - 1);
+
+    return date.toLocaleString("en-US", {
+      month: "long",
+    });
+  }
 
   if (selectedCity) pullSelectedCity(selectedCity);
 
@@ -29,6 +40,7 @@ export const NewDropdown = ({ citiesData, pullSelectedCity }) => {
         styles={customStyles}
         onChange={handleInput}
       />
+      <CurrentDate>{`${dd} ${toMonthName(mm)}`}</CurrentDate>
     </Wrapper>
   );
 };
@@ -47,6 +59,7 @@ const customStyles = {
     display: "flex",
     backgroundColor: "transparent",
     fontSize: "3rem",
+    textTransform: "uppercase",
   }),
   singleValue: (provided, state) => ({
     ...provided,
@@ -77,4 +90,19 @@ const Wrapper = styled.div`
   padding-top: 1rem;
   padding-left: 1rem;
   background-color: transparent;
+  background: linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
+`;
+
+const CurrentDate = styled.h3`
+  color: lightgray;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 1.8rem;
+  padding-left: 0.7rem;
+
+  @media (max-width: 767px) {
+    font-size: 1.3rem;
+  }
 `;
