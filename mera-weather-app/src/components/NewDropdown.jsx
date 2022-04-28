@@ -60,6 +60,7 @@ const customStyles = {
     backgroundColor: "transparent",
     fontSize: "3rem",
     textTransform: "uppercase",
+    caretColor: "white",
   }),
   singleValue: (provided, state) => ({
     ...provided,
