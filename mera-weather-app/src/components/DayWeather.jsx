@@ -1,17 +1,20 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { FaRedoAlt } from "react-icons/fa";
 import { WeatherIcon } from "../utils/getWeatherIcon";
 import { useSelector } from "react-redux";
-// English.
 //redux
 import { useDispatch } from "react-redux";
 import { weatherAdded } from "../store2/weatherSlice";
 import { time_ago } from "../hooks/time";
 import { IconContext } from "react-icons/lib";
-
+// animations ... 
+import { Wave, Wave2,Wave7} from "../waves/Wave";
+// English.
+import { useTranslation } from "react-i18next";
 
 const DayWeather = () => {
+  const { t } = useTranslation();
   const [active, setActive] = useState(false);
   const [clicked, setClicked] = useState("Update");
   // for temperature form REDUX
@@ -29,19 +32,17 @@ const DayWeather = () => {
   // for update btn
   let timeInterval = null;
   let interval = null;
+
   //useEffect for clearing interval  and setInt every (now 3 sec but should be 1min ... later)
   useEffect(() => {
-    console.log('interval u useEffect', interval)
-    setClicked("Updated a few seconds ago ...")
+    setClicked("Updated seconds ago");
     //if (active) {
     interval = 1;
     //set interval for a minute ago with export function time_ago ...
     timeInterval = setInterval(() => {
-      console.log('interval u timu', interval)
 
       let minutica = 60 * 1000 * interval;
-      
-      console.log(time_ago(new Date(Date.now() - minutica)));
+
       setClicked(`Updated ${time_ago(new Date(Date.now() - minutica))}`);
       interval++;
       if (interval === 11) {
@@ -50,17 +51,17 @@ const DayWeather = () => {
         setClicked("Update");
       }
     }, 60000);
-  //}
+    //}
 
-    return (() => {
-      clearInterval(timeInterval)
-  })
-  }, [active,weatherData]);
-  
+    return () => {
+      clearInterval(timeInterval);
+    };
+  }, [active, weatherData]);
+
   // FUNCTION for button update and animation rotate
   const updateState = () => {
     // chenge the p when you click on btn
-    setClicked("Updated a few seconds");
+    setClicked("Updated seconds ago");
     // FOR BUTTON ANIMATION
     setInterval(() => {
       if (!active) setActive(true);
@@ -99,14 +100,10 @@ const DayWeather = () => {
         <Temperature>
           {/* round number for temp  */}
           <h4>{Math.round(weatherData.current.temp)}&#176;</h4>
-          <p>{weatherData?.current?.weather[0].main}</p>
-          {/* <p>{t("Description")}</p> */}
+          <p>{t(weatherData?.current?.weather[0].main)}</p>
         </Temperature>
-        {/* <MyIcon
-          src={getWeatherIcon(weatherData?.current?.weather[0].main)}
-          alt={weatherData?.current.weather[0].main}
-        /> */}
-       <IconContext.Provider value={{ size: 80 }}>
+
+        <IconContext.Provider value={{ size: 80 }}>
           <WeatherIcon typeOfWeather={weatherData?.current?.weather[0].main} />
         </IconContext.Provider>
       </DayInfo>
@@ -114,8 +111,17 @@ const DayWeather = () => {
         <RefreshButton active={active} onClick={updateState}>
           <FaRedoAlt />
         </RefreshButton>
-        {/* <UpdatedInfo>{t("Updated")}</UpdatedInfo> */}
-        <UpdatedInfo>{`${clicked}`}</UpdatedInfo>
+        <UpdatedInfo>{t(`${clicked}`)}</UpdatedInfo>
+        <WaveDiv>
+          <Wave />
+          {/* <Wave4/> */}
+          {/* <Wave5/> */}
+          {/* <Wave6/> */}
+        </WaveDiv>
+        <WaveDivTwo>
+          {/* <Wave2 /> */}
+          <Wave7/>
+        </WaveDivTwo>
       </RefreshContainer>
     </DayWrapper>
   );
@@ -187,20 +193,13 @@ const rotate = keyframes`
 const AnimationDiv = styled.div`
   animation: ${rotate} infinite 20s linear;
 `;
-// const MyIcon = styled.img`
-//   width: 6rem;
-// `;
-
-// MyIcon.defaultProps = {
-//   src: "01d.png",
-//   alt: "weather",
-// };
 
 const MyIcon = styled.div`
   width: 6rem;
-`
+`;
 
 const RefreshContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -212,10 +211,45 @@ const RefreshButton = styled.button`
   color: white;
   background-color: transparent;
   animation-duration: 0.2s;
-  animation-name: ${(props) => (props.active ? rotate : "")};
+  // animation-name: ${(props) => (props.active ? rotate : "")};
   outline: none;
   border: none;
   margin-right: 1rem;
+  z-index: 100;
+`;
+
+const waveAnimation = keyframes`
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -10000;
+  }
+`;
+
+const WaveDiv = styled.div`
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+  opacity: 0.55;
+
+  .animation {
+    animation-name: ${waveAnimation};
+    animation-duration: 7s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+`;
+
+const WaveDivTwo = styled.div`
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  opacity: 0.5;
 `;
 
 const UpdatedInfo = styled.span`
@@ -224,6 +258,7 @@ const UpdatedInfo = styled.span`
   color: white;
   letter-spacing: 0.2;
   margin: 0;
+  z-index: 100;
 `;
 
 export default DayWeather;
