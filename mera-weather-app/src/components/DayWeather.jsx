@@ -8,8 +8,8 @@ import { useDispatch } from "react-redux";
 import { weatherAdded } from "../store2/weatherSlice";
 import { time_ago } from "../hooks/time";
 import { IconContext } from "react-icons/lib";
-// animations ... 
-import { Wave, Wave2,Wave7} from "../waves/Wave";
+// animations ...
+import { Wave, Wave2, Wave7 } from "../waves/Wave";
 // English.
 import { useTranslation } from "react-i18next";
 
@@ -40,7 +40,6 @@ const DayWeather = () => {
     interval = 1;
     //set interval for a minute ago with export function time_ago ...
     timeInterval = setInterval(() => {
-
       let minutica = 60 * 1000 * interval;
 
       setClicked(`Updated ${time_ago(new Date(Date.now() - minutica))}`);
@@ -120,7 +119,7 @@ const DayWeather = () => {
         </WaveDiv>
         <WaveDivTwo>
           {/* <Wave2 /> */}
-          <Wave7/>
+          <Wave7 />
         </WaveDivTwo>
       </RefreshContainer>
     </DayWrapper>
@@ -154,7 +153,7 @@ const DayWrapper = styled.div`
   @media (min-width: 768px) and (max-width: 1100px) {
     width: 50%;
     height: 30vh;
-    margin: 0.5rem;
+    margin: 1rem 0.5rem 0 0;
   }
 `;
 
