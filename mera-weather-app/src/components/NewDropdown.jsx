@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Select from "react-select";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { changeCurrentCity } from "../store2/currentCitySlice";
 
-export const NewDropdown = ({ citiesData, pullSelectedCity }) => {
+export const NewDropdown = ({ citiesData }) => {
   const [selectedCity, setSelectedCity] = useState("");
   const { _links: { "ua:item": cities } = {} } = citiesData;
+
+  const dispatch = useDispatch();
+
+  const changeCity = useCallback(
+    () => dispatch(changeCurrentCity(selectedCity)),
+    [selectedCity]
+  );
+
+  useEffect(() => {
+    if (selectedCity) {
+      changeCity();
+    }
+  }, [selectedCity]);
 
   let today = new Date();
   let dd = today.getDate();
@@ -18,8 +33,6 @@ export const NewDropdown = ({ citiesData, pullSelectedCity }) => {
       month: "long",
     });
   }
-
-  if (selectedCity) pullSelectedCity(selectedCity);
 
   const handleInput = (newValue) => {
     setSelectedCity(newValue.value);

@@ -7,17 +7,15 @@ import useHttp from "../hooks/use-http";
 import { DayComponent } from "./Day";
 import { getWeekday } from "../utils/getWeekday";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { weatherAdded } from "../store2/weatherSlice";
 
-import { Dropdown } from "./Dropdown";
 import { NewDropdown } from "./NewDropdown";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const Main = () => {
   const [citiesData, setCitiesData] = useState("");
-  const [currentCity, setCurrentCity] = useState("");
   const [imgAndWeatherData, setImgAndWeatherData] = useState("");
   const [language, setLanguage] = useState("en");
   const { sendRequest } = useHttp();
@@ -32,12 +30,10 @@ export const Main = () => {
     dispatch(weatherAdded(currentWeather));
   };
 
-  const pullSelectedCity = (cityName) => {
-    console.log("i pulled city");
-    setCurrentCity(cityName);
-  };
+  // data sent from NewDropdown component to main
+  const currentCityData = useSelector((state) => state.currentCity);
 
-  console.log("rerender");
+  console.log(`rerender num`);
 
   async function fetchCities() {
     const citiesResponse = await sendRequest({
@@ -52,7 +48,7 @@ export const Main = () => {
 
   async function fetchImgAndWeatherData() {
     const currCityApiData = await sendRequest({
-      url: `https://api.teleport.org/api/urban_areas/slug:${currentCity
+      url: `https://api.teleport.org/api/urban_areas/slug:${currentCityData
         .split(" ")
         .join("-")
         .toLowerCase()}/`,
@@ -77,7 +73,7 @@ export const Main = () => {
 
   useEffect(() => {
     fetchImgAndWeatherData();
-  }, [currentCity]);
+  }, [currentCityData]);
 
   useEffect(() => {
     if (imgAndWeatherData) {
@@ -91,10 +87,7 @@ export const Main = () => {
 
   return (
     <MainWrapper image={backgroundImage ? backgroundImage : Image}>
-      <NewDropdown
-        citiesData={citiesData}
-        pullSelectedCity={pullSelectedCity}
-      />
+      <NewDropdown citiesData={citiesData} />
       <LanguageWrapper>
         <OptionEnglish
           onClick={() => {
@@ -154,6 +147,9 @@ const MainWrapper = styled.div`
   position: relative;
   display: grid;
   grid-template-rows: 1fr 30%;
+
+  -webkit-transition: background-image 1s ease-in-out;
+  transition: background-image 1s ease-in-out;
 
   @media (max-width: 767px) {
     width: 100%;
