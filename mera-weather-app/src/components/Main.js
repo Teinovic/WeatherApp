@@ -48,7 +48,9 @@ export const Main = () => {
   async function fetchImgAndWeatherData() {
     const currCityApiData = await sendRequest({
       url: `https://api.teleport.org/api/urban_areas/slug:${currentCityData
+
         .replace(/,/g, "")
+
         .split(" ")
         .join("-")
         .toLowerCase()}/`,
