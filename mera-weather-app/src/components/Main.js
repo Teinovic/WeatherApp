@@ -5,7 +5,6 @@ import Image from "../download.jpeg";
 import useHttp from "../hooks/use-http";
 
 import { DayComponent } from "./Day";
-import { getWeekday } from "../utils/getWeekday";
 
 import { useDispatch, useSelector } from "react-redux";
 import { weatherAdded } from "../store2/weatherSlice";
@@ -120,20 +119,11 @@ export const Main = () => {
                 key={key}
                 typeOfWeather={day.weather[0].main}
                 maxTemp={day.temp.max}
-                weekdayNum={weekdayNum}
+                weekdayNum={day.dt}
               />
             );
           })}
       </SevenDays>
-      <SevenDaysNames>
-        {imgAndWeatherData &&
-          imgAndWeatherData.weatherData.daily.slice(0, -1).map((day, key) => {
-            const date = new Date(day.dt * 1000);
-            const weekdayNum = date.getDay();
-
-            return <DayName key={key}>{getWeekday(weekdayNum)}</DayName>;
-          })}
-      </SevenDaysNames>
     </MainWrapper>
   );
 };
@@ -146,7 +136,8 @@ const MainWrapper = styled.div`
   background-size: cover;
   position: relative;
   display: grid;
-  grid-template-rows: 1fr 30%;
+
+  align-content: space-between;
 
   -webkit-transition: background-image 1s ease-in-out;
   transition: background-image 1s ease-in-out;
@@ -168,32 +159,8 @@ const SevenDays = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   color: white;
-`;
-
-const SevenDaysNames = styled.div`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-
-  color: white;
-`;
-
-const DayName = styled.p`
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding-bottom: 2vh;
-  padding-top: 0.5vh;
-  align-items: center;
-  justify-content: space-around;
-  backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.2);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  font-weight: 500;
-
-  @media (max-width: 767px) {
-    font-size: 0.6rem;
-  }
+  height: 30vh;
+  grid-gap: 0px;
 `;
 
 const LanguageWrapper = styled.div`
@@ -214,19 +181,6 @@ const OptionEnglish = styled.button`
 `;
 const OptionSerbian = styled.button`
   color: white;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
-`;
-
-const Button = styled.button`
-  width: 2rem;
-  height: 2rem;
-  padding: 0.1rem 0.5rem;
-  border-radious: 25%;
   background-color: transparent;
   background-repeat: no-repeat;
   border: none;
