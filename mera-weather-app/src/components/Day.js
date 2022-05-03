@@ -27,6 +27,7 @@ const Day = styled.div`
   backdrop-filter: blur(8px);
   border: solid 0.2px grey;
   border-top: none;
+
   :hover {
     transform-origin: bottom center;
     -webkit-transform: scale(1, 1.1);
