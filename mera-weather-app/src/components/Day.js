@@ -9,17 +9,13 @@ export function DayComponent({ keyProp, maxTemp, typeOfWeather, weekdayNum }) {
   const weekdayNumSingleDigit = date.getDay();
 
   return (
-    <>
-      <Day key={keyProp}>
-        <IconContext.Provider
-          value={{ size: window.innerWidth > 767 ? 42 : 22 }}
-        >
-          <WeatherIcon typeOfWeather={typeOfWeather} />
-        </IconContext.Provider>
-        <TemperatureNum>{Math.round(maxTemp)}°</TemperatureNum>
-        <DayName>{getWeekday(weekdayNumSingleDigit)}</DayName>
-      </Day>
-    </>
+    <Day key={keyProp}>
+      <IconContext.Provider value={{ size: window.innerWidth > 767 ? 42 : 22 }}>
+        <WeatherIcon typeOfWeather={typeOfWeather} />
+      </IconContext.Provider>
+      <TemperatureNum>{Math.round(maxTemp)}°</TemperatureNum>
+      <DayName>{getWeekday(weekdayNumSingleDigit)}</DayName>
+    </Day>
   );
 }
 
@@ -29,7 +25,8 @@ const Day = styled.div`
   align-items: center;
   justify-content: space-around;
   backdrop-filter: blur(8px);
-
+  position: relative;
+  box-shadow: inset 0px 0px 0px 0px grey;
   :hover {
     transform-origin: bottom center;
     -webkit-transform: scale(1, 1.1);
@@ -38,7 +35,7 @@ const Day = styled.div`
 
     transition: all 0.4s ease-in-out;
     background-color: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(8px);
+    //backdrop-filter: blur(8px);
     filter: brightness(5);
   }
 `;
