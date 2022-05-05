@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 
 const DetailWeather = () => {
   const { t } = useTranslation();
-  // for hum,pres,and all ... last item from arr ...
-  const weatherData = useSelector((state) => state.weather);
-  console.log("weatherData", weatherData);
+  // for hum,pres,and all ... last item from arr ... 
+  const weatherData = useSelector(state => state.weather);
+  
 
   return (
     <Suspense>

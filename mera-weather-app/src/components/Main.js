@@ -20,9 +20,10 @@ export const Main = () => {
   const { sendRequest } = useHttp();
   // REEDUX define dispatch ... i import useDispathc for this and weatherActions for function showWeather
   const dispatch = useDispatch();
+  const weatherData = useSelector((state) => state.weather);
 
   //REDUX put weatherData in const
-  let currentWeather = imgAndWeatherData.weatherData || "nesto";
+  let currentWeather = imgAndWeatherData?.weatherData || "nesto";
 
   // function for REDUX  ...
   const showWeather = () => {
@@ -32,7 +33,61 @@ export const Main = () => {
   // data sent from NewDropdown component to main
   const currentCityData = useSelector((state) => state.currentCity);
 
-  console.log(`rerender num`);
+  // for localStorage and updating the weather for localStorage city ...
+  useEffect(() => {
+    // function for REDUX  ...
+    const showWeather = () => {
+      dispatch(weatherAdded(resultFetching));
+    };
+    let resultFetching;
+
+    const local = JSON.parse(localStorage.getItem("podaci"));
+    //if there is no localStorage default city cor for Belgrade ... to show Belg weather
+    if (!local) {
+      const lat = 44.804;
+      const lon = 20.4651;
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then(
+          (result) => {
+            resultFetching = result;
+            showWeather();
+          },
+          (error) => {
+            console.error("Error Fetching the Data", error);
+          }
+        );
+    } else {
+      const lat = local.weatherData.lat;
+      const lon = local.weatherData.lon;
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then(
+          (result) => {
+            resultFetching = result;
+            console.log("result", result);
+            showWeather();
+          },
+          (error) => {
+            console.error("Error Fetching the Data", error);
+          }
+        );
+
+        setImgAndWeatherData(JSON.parse(localStorage.getItem("podaci")));
+
+    }
+    
+  }, []);
 
   async function fetchCities() {
     const citiesResponse = await sendRequest({
@@ -40,6 +95,7 @@ export const Main = () => {
     });
     setCitiesData(citiesResponse);
   }
+
   // fetching all the cities with an image
   useEffect(() => {
     if (!citiesData) fetchCities();
@@ -77,11 +133,14 @@ export const Main = () => {
     fetchImgAndWeatherData();
   }, [currentCityData]);
 
+  // when imgAndWeather changes put that in localStorage
   useEffect(() => {
+    localStorage.setItem("podaci", JSON.stringify(imgAndWeatherData));
+
     if (imgAndWeatherData) {
       showWeather();
     }
-  }, [imgAndWeatherData]);
+  }, [imgAndWeatherData, weatherData]);
 
   // from currentCityApiData
   const backgroundImage =
