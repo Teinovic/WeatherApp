@@ -8,6 +8,7 @@ const DetailWeather = () => {
   // for hum,pres,and all ... last item from arr ... 
   const weatherData = useSelector(state => state.weather);
   
+
   return (
     <Suspense>
       <DetailWrapper>
@@ -24,7 +25,7 @@ const DetailWeather = () => {
           <h4>{t("UV Index")}</h4>
         </UvIndex>
         <Visibility>
-          <h3>{Math.round(weatherData.current.visibility/1000)}km</h3>
+          <h3>{Math.round(weatherData.current.visibility / 1000)}km</h3>
           <h4>{t("Visibility")}</h4>
         </Visibility>
       </DetailWrapper>
@@ -34,7 +35,7 @@ const DetailWeather = () => {
 
 const DetailWrapper = styled.div`
   // width: 30%;
-  height: 34vh;
+  height: 37vh;
   width: 100%;
   // height:100%;
   background: linear-gradient(
@@ -59,8 +60,6 @@ const DetailWrapper = styled.div`
 
     @media (max-width: 767px) {
       font-size: 2rem;
-      
-      
     }
   }
 
@@ -72,15 +71,12 @@ const DetailWrapper = styled.div`
 
     @media (max-width: 767px) {
       font-size: 1.5rem;
-      
-      
     }
   }
 
   @media (max-width: 767px) {
     width: 100%;
     height: 50vh;
-    
   }
   @media (min-width: 768px) and (max-width: 1100px) {
     max-height: 100%;
@@ -95,8 +91,6 @@ const Humidity = styled.div`
   flex-direction: column;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
   text-align: center;
-
-
 `;
 
 const AirPollution = styled.div`
@@ -106,7 +100,6 @@ const AirPollution = styled.div`
   flex-direction: column;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
   text-align: center;
-
 `;
 
 const UvIndex = styled.div`
