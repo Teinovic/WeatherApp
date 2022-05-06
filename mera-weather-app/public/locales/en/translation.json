@@ -10,6 +10,8 @@
     "Drizzle":"Drizzle",
     "Rain":"Rain",
     "Snow":"Snow",
+    "Dust":"Dust",
+    "Smoke":"Smoke",
     "Clear":"Clear",
     "Clouds":"Clouds",
     "Haze":"Haze",
