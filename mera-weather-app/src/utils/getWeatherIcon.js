@@ -1,35 +1,31 @@
 import React from "react";
-import {
-  WiThunderstorm,
-  WiRain,
-  WiSnow,
-  WiDaySunny,
-  WiCloud,
-  WiDayHaze,
-  WiFog,
-} from "react-icons/wi";
-
+import {WiThunderstorm} from "react-icons/wi";
+import { Drizzle,Rain,Snow,Wind,Clear,Clouds,Haze,Fog } from "../icons/icons";
 
 export function WeatherIcon({ typeOfWeather }) {
   switch (typeOfWeather) {
     case "Thunderstorm":
       return <WiThunderstorm />;
     case "Drizzle":
-      return <WiRain />;
+      return <Drizzle />;
     case "Rain":
-      return <WiRain />;
+      return <Rain />;
     case "Snow":
-      return <WiSnow />;
+      return <Snow />;
     case "Clear":
-      return <WiDaySunny />;
+      return <Clear />;
     case "Clouds":
-      return <WiCloud />;
+      return <Clouds />;
       case "Haze":
-        return <WiDayHaze/>;
+        return <Haze/>;
       case "Fog":
-        return <WiFog/>;
+        return <Fog/>;
         case "Mist":
-          return <WiFog/>;
+          return <Fog/>;
+      case "Dust":
+        return <Wind/>
+      case "Smoke":
+        return <Fog/>
     default:
       return <p>no img found</p>;
   }

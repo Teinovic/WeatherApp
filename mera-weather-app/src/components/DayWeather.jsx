@@ -77,6 +77,7 @@ const DayWeather = () => {
       .then(
         (result) => {
           setData(result);
+          console.log('UPDATED result', result)
           resultFetching = result;
           setLoading(false);
           showWeather();
