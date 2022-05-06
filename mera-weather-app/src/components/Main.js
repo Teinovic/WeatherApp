@@ -85,10 +85,8 @@ export const Main = () => {
           }
         );
 
-        setImgAndWeatherData(JSON.parse(localStorage.getItem("podaci")));
-
+      setImgAndWeatherData(JSON.parse(localStorage.getItem("podaci")));
     }
-    
   }, []);
 
   async function fetchCities() {
@@ -98,7 +96,7 @@ export const Main = () => {
     setCitiesData(citiesResponse);
   }
 
-  // fetching all the cities with an image
+  // fetching all the cities that have an image available for fetching
   useEffect(() => {
     if (!citiesData) fetchCities();
   }, [citiesData]);
