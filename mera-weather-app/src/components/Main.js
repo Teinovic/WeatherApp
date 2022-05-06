@@ -10,14 +10,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { weatherAdded } from "../store2/weatherSlice";
 
 import { NewDropdown } from "./NewDropdown";
+import { BackgroundImage } from "./BackgroundImage";
 
+// const API_KEY = process.env.REACT_APP_API_KEY;
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const Main = () => {
   const [citiesData, setCitiesData] = useState("");
   const [imgAndWeatherData, setImgAndWeatherData] = useState("");
   const [language, setLanguage] = useState("en");
-  const { sendRequest } = useHttp();
+  const { isLoading, error, sendRequest } = useHttp();
   // REEDUX define dispatch ... i import useDispathc for this and weatherActions for function showWeather
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather);
@@ -104,9 +106,7 @@ export const Main = () => {
   async function fetchImgAndWeatherData() {
     const currCityApiData = await sendRequest({
       url: `https://api.teleport.org/api/urban_areas/slug:${currentCityData
-
         .replace(/,/g, "")
-
         .split(" ")
         .join("-")
         .toLowerCase()}/`,
@@ -146,8 +146,14 @@ export const Main = () => {
   const backgroundImage =
     imgAndWeatherData && imgAndWeatherData.imgData.photos[0].image.mobile;
 
+  if (error) return <h1>{error}</h1>;
+
   return (
-    <MainWrapper image={backgroundImage ? backgroundImage : Image}>
+    <MainWrapper>
+      <BackgroundImage
+        imageLocation={backgroundImage ? backgroundImage : Image}
+        getResponsePending={isLoading}
+      />
       <NewDropdown citiesData={citiesData} />
       <LanguageWrapper>
         <OptionEnglish
@@ -192,7 +198,7 @@ export const Main = () => {
 
 const MainWrapper = styled.div`
   width: 70%;
-  background-image: url(${(props) => props.image});
+  // background-image: url(${(props) => props.image});
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -218,6 +224,7 @@ const MainWrapper = styled.div`
 `;
 
 const SevenDays = styled.div`
+  z-index: 5;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   color: white;
@@ -226,6 +233,7 @@ const SevenDays = styled.div`
 `;
 
 const LanguageWrapper = styled.div`
+  z-index: 5;
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
