@@ -101,6 +101,7 @@ const customStyles = {
 };
 
 const Wrapper = styled.div`
+  z-index: 5;
   padding-top: 1rem;
   padding-left: 1rem;
   background-color: transparent;
