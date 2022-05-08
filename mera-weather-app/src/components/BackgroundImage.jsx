@@ -5,12 +5,14 @@ import { DotWave } from "@uiball/loaders";
 import "./bgimg.css";
 import Image from "../download.jpeg";
 
-export const BackgroundImage = ({ imageLocation, getRequestPending }) => {
+export const BackgroundImage = ({ imageLocation, getResponsePending }) => {
   const [moreThanOneSecGetReq, setMoreThanOneSecGetReq] = useState(false);
+  console.log(getResponsePending);
 
   useEffect(() => {
     let oneSecDelay;
-    if (getRequestPending) {
+
+    if (getResponsePending) {
       oneSecDelay = setTimeout(() => {
         setMoreThanOneSecGetReq(true);
       }, 1000);
@@ -21,7 +23,7 @@ export const BackgroundImage = ({ imageLocation, getRequestPending }) => {
     return () => {
       clearTimeout(oneSecDelay);
     };
-  }, [getRequestPending]);
+  }, [getResponsePending]);
 
   return (
     <>
@@ -39,7 +41,12 @@ export const BackgroundImage = ({ imageLocation, getRequestPending }) => {
           <>
             {moreThanOneSecGetReq && (
               <Wrapper>
-                <DotWave size={47} speed={1} color="white" />
+                <DotWave
+                  size={47}
+                  speed={1}
+                  color="white"
+                  styles={{ zIndex: 3 }}
+                />
               </Wrapper>
             )}
           </>
@@ -65,7 +72,7 @@ const BackgroundImageDiv = styled.div`
 
 const Wrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 0;
+  z-index: 3;
   width: 100%;
   height: 100%;
   position: absolute;

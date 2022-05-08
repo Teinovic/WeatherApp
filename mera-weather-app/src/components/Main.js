@@ -123,6 +123,7 @@ export const Main = () => {
   // }, [])
   
 
+
   async function fetchCities() {
     const citiesResponse = await sendRequest({
       url: "https://api.teleport.org/api/urban_areas/",
@@ -130,7 +131,7 @@ export const Main = () => {
     setCitiesData(citiesResponse);
   }
 
-  // fetching all the cities with an image
+  // fetching all the cities that have an image available for fetching
   useEffect(() => {
     if (!citiesData) fetchCities();
   }, [citiesData]);

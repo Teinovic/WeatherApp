@@ -46,7 +46,6 @@ export const NewDropdown = ({ citiesData }) => {
       return { value: city.name, label: city.name };
     });
 
-  console.log(citiesArray);
   return (
     <Wrapper>
       <Select
