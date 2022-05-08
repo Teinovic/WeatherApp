@@ -35,6 +35,7 @@ export const NewDropdown = ({ citiesData }) => {
   }
 
   const handleInput = (newValue) => {
+    localStorage.setItem("city",newValue.value);
     setSelectedCity(newValue.value);
     return newValue;
   };
@@ -52,6 +53,7 @@ export const NewDropdown = ({ citiesData }) => {
         options={citiesArray}
         styles={customStyles}
         onChange={handleInput}
+        defaultValue={{ label: localStorage.getItem("city") ? (localStorage.getItem("city")) : "Belgrade", value: 0 }}
       />
       <CurrentDate>{`${dd} ${toMonthName(mm)}`}</CurrentDate>
     </Wrapper>
