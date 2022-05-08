@@ -13,10 +13,15 @@ import { Wave, Wave2, Wave7 } from "../waves/Wave";
 // English.
 import { useTranslation } from "react-i18next";
 
+import { SwitchTransition, CSSTransition } from "react-transition-group";
+import "./numSlide.css";
+import { AnimatedNumber } from "./AnimatedNumber";
+
 const DayWeather = () => {
   const { t } = useTranslation();
   const [active, setActive] = useState(false);
   const [clicked, setClicked] = useState("Update");
+  const [temp, setTemp] = useState("");
   // for temperature form REDUX
   const weatherData = useSelector((state) => state.weather);
 
@@ -77,7 +82,7 @@ const DayWeather = () => {
       .then(
         (result) => {
           setData(result);
-          console.log('UPDATED result', result)
+          console.log("UPDATED result", result);
           resultFetching = result;
           setLoading(false);
           showWeather();
@@ -94,12 +99,26 @@ const DayWeather = () => {
     setActive(false);
   };
 
+  useEffect(() => {
+    if (weatherData)
+      setTemp(Math.round(weatherData.current.temp).toString().split(""));
+  }, [weatherData]);
+
   return (
     <DayWrapper>
       <DayInfo>
         <Temperature>
-          {/* round number for temp  */}
-          <h4>{Math.round(weatherData.current.temp)}&#176;</h4>
+          <div>
+            {/* <ZIndexAboveTempDiv></ZIndexAboveTempDiv> */}
+            <NumsFlex>
+              {temp &&
+                temp.map((number, idx) => (
+                  <AnimatedNumber temp={temp} number={number} idx={idx} />
+                ))}
+              <h4>&#176;</h4>
+            </NumsFlex>
+          </div>
+
           <p>{t(weatherData?.current?.weather[0].main)}</p>
         </Temperature>
 
@@ -131,6 +150,7 @@ const DayWrapper = styled.div`
   height: 60vh;
   width: 100%;
   display: grid;
+
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 25%;
   background: linear-gradient(
@@ -160,6 +180,7 @@ const DayWrapper = styled.div`
 
 const DayInfo = styled.div`
   display: flex;
+
   align-items: flex-start;
   justify-content: space-between;
   padding: 3rem 2rem 0rem 2rem;
@@ -179,6 +200,8 @@ const Temperature = styled.div`
     font-weight: bold;
     margin: 0;
   }
+
+  transition: span 0.5s ease-in-out;
 `;
 
 const rotate = keyframes`
@@ -188,14 +211,6 @@ const rotate = keyframes`
   to {
     transform: rotate(360deg);
   }
-`;
-
-const AnimationDiv = styled.div`
-  animation: ${rotate} infinite 20s linear;
-`;
-
-const MyIcon = styled.div`
-  width: 6rem;
 `;
 
 const RefreshContainer = styled.div`
@@ -259,6 +274,24 @@ const UpdatedInfo = styled.span`
   letter-spacing: 0.2;
   margin: 0;
   z-index: 100;
+`;
+
+const ZIndexAboveTempDiv = styled.div`
+  position: relative;
+  height: 4rem;
+  width: auto;
+  z-index: 2;
+`;
+
+const NumsFlex = styled.div`
+  display: flex;
+  z-index: 0;
+`;
+
+const FadeSpan = styled.span`
+  transition: 0.5s;
+  opacity: ${({ state }) => (state === "entered" ? 1 : 0)};
+  display: ${({ state }) => (state === "exited" ? "none" : "block")};
 `;
 
 export default DayWeather;
