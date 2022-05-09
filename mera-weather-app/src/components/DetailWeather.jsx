@@ -81,7 +81,7 @@ const DetailWrapper = styled.div`
   }
   @media (min-width: 768px) and (max-width: 1100px) {
     max-height: 100%;
-    margin: 1rem 0 1rem 0.5rem;
+    //margin: 1rem 0 1rem 0.5rem;
   }
 `;
 

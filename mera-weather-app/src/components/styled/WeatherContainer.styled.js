@@ -12,8 +12,9 @@ export const WeatherContainer = styled.div`
     flex-direction: column-reverse;
   }
   @media (min-width: 768px) and (max-width: 1100px) {
-    width: 95%;
-    height: 95%;
+    width: 90%;
+    height: 90vh;
+    background-color: red;
     flex-direction: column-reverse;
   }
 `;
