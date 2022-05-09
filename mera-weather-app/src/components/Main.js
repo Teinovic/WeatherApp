@@ -329,8 +329,8 @@ const SevenDays = styled.div`
 const LanguageWrapper = styled.div`
   z-index: 5;
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0.6rem;
+  right: 0.6rem;
 `;
 
 const OptionEnglish = styled.button`
