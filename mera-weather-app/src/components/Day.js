@@ -10,7 +10,7 @@ export function DayComponent({ keyProp, maxTemp, typeOfWeather, weekdayNum }) {
 
   return (
     <Day key={keyProp}>
-      <IconContext.Provider value={{ size: window.innerWidth > 767 ? 42 : 22 }}>
+      <IconContext.Provider value={{ size: window.innerWidth > 767 ? 35 : 22 }}>
         <WeatherIcon typeOfWeather={typeOfWeather} />
       </IconContext.Provider>
       <TemperatureNum>{Math.round(maxTemp)}°</TemperatureNum>
@@ -28,6 +28,11 @@ const Day = styled.div`
   border: solid 0.2px grey;
   border-top: none;
 
+  canvas {
+    width: 30px;
+    height: 30px;
+  }
+
   :hover {
     transform-origin: bottom center;
     -webkit-transform: scale(1, 1.1);
@@ -42,13 +47,24 @@ const Day = styled.div`
     //backdrop-filter: blur(8px);
     filter: brightness(5);
   }
+
+  @media (max-width: 767px) {
+    canvas {
+      width: 40px;
+      height: 40px;
+    }
+  }
 `;
 
 const TemperatureNum = styled.p`
   font-size: 1.6rem;
 
   @media (max-width: 767px) {
-    font-size: 1rem;
+    font-size: 2rem;
+  }
+
+  @media (min-width: 768px) and (max-width: 1100px) {
+    font-size: 2rem;
   }
 `;
 
@@ -65,6 +81,6 @@ const DayName = styled.p`
   font-weight: 500;
 
   @media (max-width: 767px) {
-    font-size: 0.6rem;
+    font-size: 1remrem;
   }
 `;

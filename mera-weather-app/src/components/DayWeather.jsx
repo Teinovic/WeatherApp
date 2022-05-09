@@ -177,9 +177,10 @@ const DayWrapper = styled.div`
     margin-bottom: 0rem;
   }
   @media (min-width: 768px) and (max-width: 1100px) {
+    grid-template-rows: 80% 20%;
     width: 50%;
     height: 30vh;
-    margin: 1rem 0.5rem 0 0;
+    margin: 0;
   }
 `;
 
@@ -189,6 +190,10 @@ const DayInfo = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   padding: 3rem 2rem 0rem 2rem;
+
+  @media (min-width: 768px) and (max-width: 1100px) {
+    padding: 1rem 1rem 0rem 1rem;
+  }
 `;
 
 const Temperature = styled.div`
@@ -196,6 +201,8 @@ const Temperature = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
+  z-index: 100;
+
   h4 {
     font-size: 4rem;
     margin: 0;
@@ -205,6 +212,7 @@ const Temperature = styled.div`
     font-weight: bold;
     margin: 0;
   }
+  
 
   transition: span 0.5s ease-in-out;
 `;
@@ -224,6 +232,10 @@ const RefreshContainer = styled.div`
   align-items: flex-end;
   justify-content: flex-start;
   padding: 0rem 0rem 1rem 2rem;
+
+  @media (min-width: 768px) and (max-width: 1100px) {
+    padding: 0.4rem;
+  }
 `;
 const RefreshButton = styled.button`
   cursor: pointer;
@@ -241,6 +253,9 @@ const RefreshButton = styled.button`
 const waveAnimation = keyframes`
   0% {
     stroke-dashoffset: 0;
+  }
+  10% {
+    opacity: 0;
   }
   100% {
     stroke-dashoffset: -10000;
@@ -261,6 +276,10 @@ const WaveDiv = styled.div`
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
+
+  @media (min-width: 768px) and (max-width: 1100px) {
+    bottom: -6px;
+  }
 `;
 
 const WaveDivTwo = styled.div`
@@ -270,6 +289,10 @@ const WaveDivTwo = styled.div`
   width: 100%;
   z-index: 10;
   opacity: 0.5;
+
+  @media (min-width: 768px) and (max-width: 1100px) {
+    bottom: -4px;
+  }
 `;
 
 const UpdatedInfo = styled.span`
