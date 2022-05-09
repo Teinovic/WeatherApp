@@ -35,7 +35,7 @@ export const NewDropdown = ({ citiesData }) => {
   }
 
   const handleInput = (newValue) => {
-    localStorage.setItem("city",newValue.value);
+    localStorage.setItem("city", newValue.value);
     setSelectedCity(newValue.value);
     return newValue;
   };
@@ -52,7 +52,12 @@ export const NewDropdown = ({ citiesData }) => {
         options={citiesArray}
         styles={customStyles}
         onChange={handleInput}
-        defaultValue={{ label: localStorage.getItem("city") ? (localStorage.getItem("city")) : "Belgrade", value: 0 }}
+        defaultValue={{
+          label: localStorage.getItem("city")
+            ? localStorage.getItem("city")
+            : "Belgrade",
+          value: 0,
+        }}
       />
       <CurrentDate>{`${dd} ${toMonthName(mm)}`}</CurrentDate>
     </Wrapper>
@@ -72,7 +77,8 @@ const customStyles = {
     color: "#fff",
     display: "flex",
     backgroundColor: "transparent",
-    fontSize: "3rem",
+    fontSize: window.innerWidth > 767 ? "3rem" : "2rem",
+    // fontSize: "3rem",
     textTransform: "uppercase",
     caretColor: "white",
   }),
@@ -86,8 +92,8 @@ const customStyles = {
     ...provided,
 
     svg: {
-      height: "2rem",
-      width: "2rem",
+      height: window.innerWidth > 767 ? "2rem" : "1rem",
+      width: window.innerWidth > 767 ? "2rem" : "1rem",
       color: "white",
     },
   }),

@@ -57,10 +57,10 @@ const Day = styled.div`
 `;
 
 const TemperatureNum = styled.p`
-  font-size: 1.6rem;
+  font-size: 2rem;
 
   @media (max-width: 767px) {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   @media (min-width: 768px) and (max-width: 1100px) {
@@ -81,6 +81,6 @@ const DayName = styled.p`
   font-weight: 500;
 
   @media (max-width: 767px) {
-    font-size: 1remrem;
+    font-size: 1rem;
   }
 `;
