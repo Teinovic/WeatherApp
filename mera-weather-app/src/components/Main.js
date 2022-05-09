@@ -23,9 +23,10 @@ export const Main = () => {
   // REEDUX define dispatch ... i import useDispathc for this and weatherActions for function showWeather
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather);
+  console.log('imgAndWeatherData', imgAndWeatherData);
 
   //REDUX put weatherData in const
-  let currentWeather = imgAndWeatherData?.weatherData || "nesto";
+  let currentWeather = imgAndWeatherData?.weatherData || weatherData;
 
   // function for REDUX  ...
   const showWeather = () => {
@@ -36,58 +37,92 @@ export const Main = () => {
   const currentCityData = useSelector((state) => state.currentCity);
 
   // for localStorage and updating the weather for localStorage city ...
-  useEffect(() => {
-    // function for REDUX  ...
-    const showWeather = () => {
-      dispatch(weatherAdded(resultFetching));
-    };
-    let resultFetching;
+  // useEffect(() => {
+  //   // function for REDUX  ...
+  //   const showWeather = () => {
+  //     dispatch(weatherAdded(resultFetching));
+  //   };
+  //   let resultFetching;
 
-    const local = JSON.parse(localStorage.getItem("podaci"));
-    //if there is no localStorage default city cor for Belgrade ... to show Belg weather
-    if (!local) {
-      const lat = 44.804;
-      const lon = 20.4651;
+  //   const local = JSON.parse(localStorage.getItem("podaci"));
+  //   //if there is no localStorage default city cor for Belgrade ... to show Belg weather
+  //   if (!local) {
+  //     const lat = 44.804;
+  //     const lon = 20.4651;
 
-      fetch(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
-      )
-        .then((res) => {
-          return res.json();
-        })
-        .then(
-          (result) => {
-            resultFetching = result;
-            showWeather();
-          },
-          (error) => {
-            console.error("Error Fetching the Data", error);
-          }
-        );
-    } else {
-      const lat = local.weatherData.lat;
-      const lon = local.weatherData.lon;
+  //     fetch(
+  //       `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
+  //     )
+  //       .then((res) => {
+  //         return res.json();
+  //       })
+  //       .then(
+  //         (result) => {
+  //           resultFetching = result;
+  //           showWeather();
+  //         },
+  //         (error) => {
+  //           console.error("Error Fetching the Data", error);
+  //         }
+  //       );
+  //   } else {
+  //     const lat = local.weatherData.lat;
+  //     const lon = local.weatherData.lon;
 
-      fetch(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
-      )
-        .then((res) => {
-          return res.json();
-        })
-        .then(
-          (result) => {
-            resultFetching = result;
-            console.log("result", result);
-            showWeather();
-          },
-          (error) => {
-            console.error("Error Fetching the Data", error);
-          }
-        );
+  //     fetch(
+  //       `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
+  //     )
+  //       .then((res) => {
+  //         return res.json();
+  //       })
+  //       .then(
+  //         (result) => {
+  //           resultFetching = result;
+  //           console.log("result", result);
+  //           showWeather();
+  //         },
+  //         (error) => {
+  //           console.error("Error Fetching the Data", error);
+  //         }
+  //       );
 
-      setImgAndWeatherData(JSON.parse(localStorage.getItem("podaci")));
-    }
-  }, []);
+  //       setImgAndWeatherData(JSON.parse(localStorage.getItem("podaci")));
+
+  //   }
+    
+  // }, []);
+
+  // useEffect(() => {
+  //   let resultFetching;
+  //   const lat = JSON.parse(localStorage.getItem("lat"));
+  //   const lon = JSON.parse(localStorage.getItem("lon"));
+  //   console.log('lat,lon', lat,lon);
+  //   // function for REDUX  ...
+  //   const showWeather = () => {
+  //     dispatch(weatherAdded(resultFetching));
+  //   };
+  //   if (lat && lon ) {
+  //     fetch(
+  //             `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
+  //           )
+  //              .then((res) => {
+  //                return res.json();
+  //              })
+  //              .then(
+  //                (result) => {
+  //                  resultFetching = result;
+  //                  console.log("result", result);
+  //                  showWeather();
+  //                },
+  //                (error) => {
+  //                  console.error("Error Fetching the Data", error);
+  //                }
+  //              );
+  //   }
+    
+  // }, [])
+  
+
 
   async function fetchCities() {
     const citiesResponse = await sendRequest({
@@ -133,16 +168,77 @@ export const Main = () => {
 
   // when imgAndWeather changes put that in localStorage
   useEffect(() => {
-    localStorage.setItem("podaci", JSON.stringify(imgAndWeatherData));
+    //localStorage.setItem("podaci", JSON.stringify(imgAndWeatherData));
+    //console.log('imgAndWeatherData', imgAndWeatherData.imgData.photos[0].image.mobile);
+    //console.log("imgAndWeatherData",imgAndWeatherData.weatherData.lat);
+    //console.log("imgAndWeatherData",imgAndWeatherData.weatherData.lon);
+      let resultFetching;
 
+      // function for REDUX  ...
+      const showWeather = () => {
+        dispatch(weatherAdded(resultFetching));
+      };
+      //OVO NE DIRAJ NIKAKO !!!!
     if (imgAndWeatherData) {
+      localStorage.setItem("slika",imgAndWeatherData.imgData.photos[0].image.mobile);
+      localStorage.setItem("lat",imgAndWeatherData.weatherData.lat);
+      localStorage.setItem("lon",imgAndWeatherData.weatherData.lon);
       showWeather();
     }
-  }, [imgAndWeatherData, weatherData]);
+
+    if(localStorage.getItem("lat") && localStorage.getItem("lon")) {
+      console.log("RADI!!!!");
+      const lat = localStorage.getItem("lat");
+      const lon = localStorage.getItem("lon");
+
+    
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then(
+          (result) => {
+            resultFetching = result;
+            console.log("result", result);
+            showWeather();
+          },
+          (error) => {
+            console.error("Error Fetching the Data", error);
+          }
+        );
+    } else {
+      const lat = 44.804;
+      const lon = 20.4651;
+
+      fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
+      )
+        .then((res) => {
+          return res.json();
+        })
+        .then(
+          (result) => {
+            resultFetching = result;
+            showWeather();
+          },
+          (error) => {
+            console.error("Error Fetching the Data", error);
+          }
+        );
+    }
+    
+    console.log('weatherData pre ucitavanja 7 dana !!!', weatherData)
+
+    //showWeather();
+    // izbrisao weatherData iz niza
+  }, [imgAndWeatherData]);
 
   // from currentCityApiData
   const backgroundImage =
-    imgAndWeatherData && imgAndWeatherData.imgData.photos[0].image.mobile;
+    imgAndWeatherData ? imgAndWeatherData.imgData.photos[0].image.mobile : (localStorage.getItem("slika"));
 
   if (error) return <h1>{error}</h1>;
 
