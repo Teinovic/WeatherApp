@@ -1,0 +1,16 @@
+.fade1-enter {
+  transform: translateY(100%);
+}
+.fade1-enter-active {
+  transform: translateY(0%);
+}
+.fade1-exit {
+  transform: translateY(0%);
+}
+.fade1-exit-active {
+  transform: translateY(-100%);
+}
+.fade1-enter-active,
+.fade1-exit-active {
+  transition: transform 400ms;
+}
