@@ -38,6 +38,11 @@ const DayWeather = () => {
   let timeInterval = null;
   let interval = null;
 
+  // function for REDUX  ...
+  const showWeather = (result) => {
+    dispatch(weatherAdded(result));
+  };
+
   //useEffect for clearing interval  and setInt every (now 3 sec but should be 1min ... later)
   useEffect(() => {
     setClicked("Updated seconds ago");
@@ -82,20 +87,20 @@ const DayWeather = () => {
       .then(
         (result) => {
           setData(result);
+          
           console.log("UPDATED result", result);
+          
           resultFetching = result;
+          console.log('Updated result !!!', result)
           setLoading(false);
-          showWeather();
+          showWeather(result);
         },
         (error) => {
           setError(error);
           console.error("Error Fetching the Data", error);
         }
       );
-    // function for REDUX  ...
-    const showWeather = () => {
-      dispatch(weatherAdded(resultFetching));
-    };
+    
     setActive(false);
   };
 
