@@ -114,7 +114,6 @@ const DayWeather = () => {
       <DayInfo>
         <Temperature>
           <div>
-            {/* <ZIndexAboveTempDiv></ZIndexAboveTempDiv> */}
             <NumsFlex>
               {temp &&
                 temp.map((number, idx) => (
@@ -300,19 +299,13 @@ const UpdatedInfo = styled.span`
   color: white;
   letter-spacing: 0.2;
   margin: 0;
-  z-index: 100;
-`;
-
-const ZIndexAboveTempDiv = styled.div`
-  position: relative;
-  height: 4rem;
-  width: auto;
   z-index: 2;
 `;
 
 const NumsFlex = styled.div`
   display: flex;
-  z-index: 0;
+  z-index: 1;
+  overflow: hidden;
 `;
 
 export default DayWeather;
