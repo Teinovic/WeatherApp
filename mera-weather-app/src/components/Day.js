@@ -25,7 +25,7 @@ const Day = styled.div`
   align-items: center;
   justify-content: space-around;
   backdrop-filter: blur(8px);
-  border: solid 0.2px grey;
+  // border: solid 0.2px grey;
   border-top: none;
 
   canvas {

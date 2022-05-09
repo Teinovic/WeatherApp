@@ -324,7 +324,7 @@ const SevenDays = styled.div`
   grid-template-columns: repeat(7, 1fr);
   color: white;
   height: 30vh;
-  grid-gap: 0px;
+  grid-gap: 2px;
 `;
 
 const LanguageWrapper = styled.div`
