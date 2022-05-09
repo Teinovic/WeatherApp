@@ -87,11 +87,11 @@ const DayWeather = () => {
       .then(
         (result) => {
           setData(result);
-          
+
           console.log("UPDATED result", result);
-          
+
           resultFetching = result;
-          console.log('Updated result !!!', result)
+          console.log("Updated result !!!", result);
           setLoading(false);
           showWeather(result);
         },
@@ -100,7 +100,7 @@ const DayWeather = () => {
           console.error("Error Fetching the Data", error);
         }
       );
-    
+
     setActive(false);
   };
 
@@ -212,7 +212,6 @@ const Temperature = styled.div`
     font-weight: bold;
     margin: 0;
   }
-  
 
   transition: span 0.5s ease-in-out;
 `;
@@ -314,12 +313,6 @@ const ZIndexAboveTempDiv = styled.div`
 const NumsFlex = styled.div`
   display: flex;
   z-index: 0;
-`;
-
-const FadeSpan = styled.span`
-  transition: 0.5s;
-  opacity: ${({ state }) => (state === "entered" ? 1 : 0)};
-  display: ${({ state }) => (state === "exited" ? "none" : "block")};
 `;
 
 export default DayWeather;
