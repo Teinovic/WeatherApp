@@ -243,7 +243,7 @@ const RefreshButton = styled.button`
   color: white;
   background-color: transparent;
   animation-duration: 0.2s;
-  // animation-name: ${(props) => (props.active ? rotate : "")};
+  animation-name: ${(props) => (props.active ? rotate : "")};
   outline: none;
   border: none;
   margin-right: 1rem;
