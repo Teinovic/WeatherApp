@@ -123,7 +123,7 @@ const Wrapper = styled.div`
 `;
 
 const CurrentDate = styled.h3`
-  color: lightgray;
+  color: white;
   text-transform: uppercase;
   margin: 0;
   padding: 0;
