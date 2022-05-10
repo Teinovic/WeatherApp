@@ -11,7 +11,6 @@ import { weatherAdded } from "../store2/weatherSlice";
 
 import { NewDropdown } from "./NewDropdown";
 import { BackgroundImage } from "./BackgroundImage";
-import { AppName } from "./styled/AppName";
 
 // const API_KEY = process.env.REACT_APP_API_KEY;
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -246,7 +245,6 @@ export const Main = () => {
 
   return (
     <MainWrapper>
-      <AppName>M-O WeatherApp</AppName>
       <BackgroundImage
         imageLocation={backgroundImage ? backgroundImage : Image}
         getResponsePending={isLoading}
