@@ -88,15 +88,23 @@ const customStyles = {
     backgroundColor: "transparent",
     border: "none",
   }),
-  dropdownIndicator: (provided, state) => ({
-    ...provided,
+  dropdownIndicator: (provided, state) => {
+    console.log(state);
+    return {
+      ...provided,
 
-    svg: {
-      height: window.innerWidth > 767 ? "2rem" : "1rem",
-      width: window.innerWidth > 767 ? "2rem" : "1rem",
-      color: "white",
-    },
-  }),
+      svg: {
+        height: window.innerWidth > 767 ? "2rem" : "1rem",
+        width: window.innerWidth > 767 ? "2rem" : "1rem",
+        color: "white",
+
+        transform: state.selectProps.menuIsOpen
+          ? "rotate(180deg)"
+          : "rotate(360deg)",
+        transition: "transform 0.5s",
+      },
+    };
+  },
   indicatorSeparator: () => ({
     display: "none",
   }),
@@ -104,6 +112,11 @@ const customStyles = {
   menu: (provided) => ({
     ...provided,
     width: 200,
+  }),
+
+  input: (provided) => ({
+    ...provided,
+    color: "lightgray",
   }),
 };
 
