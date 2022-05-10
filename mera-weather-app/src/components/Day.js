@@ -54,6 +54,13 @@ const Day = styled.div`
       height: 40px;
     }
   }
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    height: 7rem;
+  }
 `;
 
 const TemperatureNum = styled.p`
@@ -65,6 +72,13 @@ const TemperatureNum = styled.p`
 
   @media (min-width: 768px) and (max-width: 1100px) {
     font-size: 2rem;
+  }
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    font-size: 1rem;
   }
 `;
 
@@ -81,6 +95,7 @@ const DayName = styled.p`
   font-weight: 500;
 
   @media (max-width: 767px) {
-    font-size: 1rem;
+    font-size: 0.8rem;
+
   }
 `;
