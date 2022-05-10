@@ -4,8 +4,6 @@ import styled from "styled-components";
 import "./numSlide.css";
 
 export const AnimatedNumber = ({ temp, number, idx }) => {
-  console.log(temp, number, idx);
-
   return (
     <SwitchTransition>
       <CSSTransition
