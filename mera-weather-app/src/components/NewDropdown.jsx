@@ -123,6 +123,7 @@ const customStyles = {
     opacity: 0.8,
     height: 250,
     overflow: "hidden",
+    borderRadius: "0.5rem",
   }),
 
   input: (provided) => ({
