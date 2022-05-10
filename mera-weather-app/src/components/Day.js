@@ -24,7 +24,7 @@ const Day = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px) brightness(65%);
   // border: solid 0.2px grey;
   border-top: none;
 
@@ -55,10 +55,7 @@ const Day = styled.div`
     }
   }
 
-  @media only screen 
-  and (min-device-width: 360px) 
-  and (max-device-width: 950px) 
-  and (orientation: landscape) { 
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     height: 7rem;
   }
 `;
@@ -74,10 +71,7 @@ const TemperatureNum = styled.p`
     font-size: 2rem;
   }
 
-  @media only screen 
-  and (min-device-width: 360px) 
-  and (max-device-width: 950px) 
-  and (orientation: landscape) { 
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     font-size: 1rem;
   }
 `;
@@ -96,6 +90,5 @@ const DayName = styled.p`
 
   @media (max-width: 767px) {
     font-size: 0.8rem;
-
   }
 `;
