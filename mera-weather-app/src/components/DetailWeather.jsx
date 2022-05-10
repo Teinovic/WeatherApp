@@ -79,6 +79,14 @@ const DetailWrapper = styled.div`
     width: 100%;
     height: 50vh;
   }
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    height: 40vh;
+  }
+
   @media (min-width: 768px) and (max-width: 1100px) {
     max-height: 100%;
     //margin: 1rem 0 1rem 0.5rem;
@@ -92,6 +100,18 @@ const Humidity = styled.div`
   flex-direction: column;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
   text-align: center;
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    h3 {
+      font-size: 1rem;
+    }
+    h4 {
+      font-size: 0.8rem;
+    }
+  }
 `;
 
 const AirPollution = styled.div`
@@ -101,6 +121,18 @@ const AirPollution = styled.div`
   flex-direction: column;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
   text-align: center;
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    h3 {
+      font-size: 1rem;
+    }
+    h4 {
+      font-size: 0.8rem;
+    }
+  }
 `;
 
 const UvIndex = styled.div`
@@ -110,6 +142,18 @@ const UvIndex = styled.div`
   flex-direction: column;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
   text-align: center;
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    h3 {
+      font-size: 1rem;
+    }
+    h4 {
+      font-size: 0.8rem;
+    }
+  }
 `;
 
 const Visibility = styled.div`
@@ -119,6 +163,18 @@ const Visibility = styled.div`
   flex-direction: column;
   padding: 0.2rem 0.5rem 0.2rem 0.2rem;
   text-align: center;
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    h3 {
+      font-size: 1rem;
+    }
+    h4 {
+      font-size: 0.8rem;
+    }
+  }
 `;
 
 export default DetailWeather;

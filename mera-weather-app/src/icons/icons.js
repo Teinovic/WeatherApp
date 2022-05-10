@@ -4,7 +4,7 @@ import ReactAnimatedWeather from "react-animated-weather";
 const defaults = {
   icon: "CLEAR_DAY",
   color: "white",
-  size: 70,
+  size: window.innerWidth > 900 ? 70 : 30,
   animate: true,
 };
 const icons = {

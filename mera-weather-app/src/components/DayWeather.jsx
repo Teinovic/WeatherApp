@@ -176,6 +176,14 @@ const DayWrapper = styled.div`
     height: 50vh;
     margin-bottom: 0rem;
   }
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    height: 40vh;
+  }
+
   @media (min-width: 768px) and (max-width: 1100px) {
     grid-template-rows: 80% 20%;
     width: 50%;
@@ -191,8 +199,21 @@ const DayInfo = styled.div`
   justify-content: space-between;
   padding: 3rem 2rem 0rem 2rem;
 
+  canvas {
+    z-index:1000;
+  }
+
   @media (min-width: 768px) and (max-width: 1100px) {
     padding: 1rem 1rem 0rem 1rem;
+  }
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    canvas {
+      font-size: 1.3rem;
+    }
   }
 `;
 
@@ -212,9 +233,45 @@ const Temperature = styled.div`
     font-weight: bold;
     margin: 0;
   }
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    p {
+      font-size: 1rem;
+    }
+  }
   
 
   transition: span 0.5s ease-in-out;
+`;
+
+const ZIndexAboveTempDiv = styled.div`
+  position: relative;
+  height: 4rem;
+  width: auto;
+  z-index: 2;
+`;
+
+const NumsFlex = styled.div`
+  display: flex;
+  z-index: 0;
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    h4 {
+      font-size: 1.3rem;
+    }
+  }
+`;
+
+const FadeSpan = styled.span`
+  transition: 0.5s;
+  opacity: ${({ state }) => (state === "entered" ? 1 : 0)};
+  display: ${({ state }) => (state === "exited" ? "none" : "block")};
 `;
 
 const rotate = keyframes`
@@ -304,22 +361,6 @@ const UpdatedInfo = styled.span`
   z-index: 100;
 `;
 
-const ZIndexAboveTempDiv = styled.div`
-  position: relative;
-  height: 4rem;
-  width: auto;
-  z-index: 2;
-`;
 
-const NumsFlex = styled.div`
-  display: flex;
-  z-index: 0;
-`;
-
-const FadeSpan = styled.span`
-  transition: 0.5s;
-  opacity: ${({ state }) => (state === "entered" ? 1 : 0)};
-  display: ${({ state }) => (state === "exited" ? "none" : "block")};
-`;
 
 export default DayWeather;

@@ -107,6 +107,13 @@ const Wrapper = styled.div`
   padding-left: 1rem;
   background-color: transparent;
   background: linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    padding: 0rem;
+  }
 `;
 
 const CurrentDate = styled.h3`

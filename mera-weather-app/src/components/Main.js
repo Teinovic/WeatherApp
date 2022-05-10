@@ -311,6 +311,15 @@ const MainWrapper = styled.div`
     // max-height: 100vh;
     background-color: green;
   }
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    height: 60vh;
+  }
+
+
   @media (min-width: 768px) and (max-width: 1100px) {
     width: 100%;
     height: 70vh;
@@ -325,6 +334,13 @@ const SevenDays = styled.div`
   color: white;
   height: 30vh;
   grid-gap: 0px;
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    height: 7rem;
+  }
 `;
 
 const LanguageWrapper = styled.div`

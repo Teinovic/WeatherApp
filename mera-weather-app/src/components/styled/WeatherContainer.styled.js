@@ -14,7 +14,13 @@ export const WeatherContainer = styled.div`
   @media (min-width: 768px) and (max-width: 1100px) {
     width: 90%;
     height: 90vh;
-    background-color: red;
     flex-direction: column-reverse;
+  }
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    width: 100%;
+    height: 100vh;
   }
 `;
