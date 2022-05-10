@@ -70,6 +70,12 @@ const customStyles = {
     width: "auto",
     padding: 2,
     paddingLeft: 5,
+    color: state.isFocused ? "black" : "white",
+    backgroundColor: state.isSelected
+      ? "rgba(51, 140, 105, 1)"
+      : state.isFocused
+      ? "white"
+      : "rgba(39, 127, 133, 1)",
   }),
   control: () => ({
     // none of react-select's styles are passed to <Control />
@@ -112,11 +118,18 @@ const customStyles = {
   menu: (provided) => ({
     ...provided,
     width: 200,
+    backgroundColor: "rgba(39, 127, 133, 1)",
+    opacity: 0.8,
+    height: 250,
+    overflow: "hidden",
   }),
 
   input: (provided) => ({
     ...provided,
     color: "lightgray",
+  }),
+  loadingMessage: (provided) => ({
+    ...provided,
   }),
 };
 
