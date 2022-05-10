@@ -87,11 +87,11 @@ const DayWeather = () => {
       .then(
         (result) => {
           setData(result);
-          
+
           console.log("UPDATED result", result);
-          
+
           resultFetching = result;
-          console.log('Updated result !!!', result)
+          console.log("Updated result !!!", result);
           setLoading(false);
           showWeather(result);
         },
@@ -100,7 +100,7 @@ const DayWeather = () => {
           console.error("Error Fetching the Data", error);
         }
       );
-    
+
     setActive(false);
   };
 
@@ -114,7 +114,6 @@ const DayWeather = () => {
       <DayInfo>
         <Temperature>
           <div>
-            {/* <ZIndexAboveTempDiv></ZIndexAboveTempDiv> */}
             <NumsFlex>
               {temp &&
                 temp.map((number, idx) => (
@@ -360,6 +359,7 @@ const UpdatedInfo = styled.span`
   margin: 0;
   z-index: 100;
 `;
+
 
 
 

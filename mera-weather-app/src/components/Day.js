@@ -25,7 +25,7 @@ const Day = styled.div`
   align-items: center;
   justify-content: space-around;
   backdrop-filter: blur(8px);
-  border: solid 0.2px grey;
+  // border: solid 0.2px grey;
   border-top: none;
 
   canvas {
@@ -64,10 +64,10 @@ const Day = styled.div`
 `;
 
 const TemperatureNum = styled.p`
-  font-size: 1.6rem;
+  font-size: 2rem;
 
   @media (max-width: 767px) {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   @media (min-width: 768px) and (max-width: 1100px) {
@@ -96,5 +96,6 @@ const DayName = styled.p`
 
   @media (max-width: 767px) {
     font-size: 0.8rem;
+
   }
 `;
