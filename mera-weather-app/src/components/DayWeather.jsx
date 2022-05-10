@@ -16,6 +16,9 @@ import { useTranslation } from "react-i18next";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
 import "./numSlide.css";
 import { AnimatedNumber } from "./AnimatedNumber";
+//for app name
+import { AppName, Circle, CircleThree, CircleTwo } from "./styled/AppName";
+
 
 const DayWeather = () => {
   const { t } = useTranslation();
@@ -111,6 +114,7 @@ const DayWeather = () => {
 
   return (
     <DayWrapper>
+      <AppName><Circle/><CircleTwo/><CircleThree/>M&amp;O WeatherApp</AppName>
       <DayInfo>
         <Temperature>
           <div>
@@ -151,6 +155,7 @@ const DayWeather = () => {
 };
 
 const DayWrapper = styled.div`
+  position: relative;
   height: 60vh;
   width: 100%;
   display: grid;
@@ -200,6 +205,10 @@ const DayInfo = styled.div`
 
   canvas {
     z-index:1000;
+  }
+
+  @media (max-width: 767px) {
+    padding: 1rem 1rem 0rem 1rem;
   }
 
   @media (min-width: 768px) and (max-width: 1100px) {

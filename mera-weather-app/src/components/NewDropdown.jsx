@@ -156,6 +156,7 @@ const CurrentDate = styled.h3`
   and (max-device-width: 950px) 
   and (orientation: landscape) { 
     padding: 0rem;
+    height: 7rem;
   }
 `;
 
