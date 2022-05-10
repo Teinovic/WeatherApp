@@ -15,7 +15,7 @@ export const AnimatedNumber = ({ temp, number, idx }) => {
         }
         timeout={500}
       >
-        <Num>{temp[idx]}</Num>
+        <Num numI={number}>{temp[idx]}</Num>
       </CSSTransition>
     </SwitchTransition>
   );
@@ -24,4 +24,7 @@ export const AnimatedNumber = ({ temp, number, idx }) => {
 const Num = styled.h4`
   position: relative;
   z-index: 1;
+  opacity: ${(props) => (props.numI === "I" ? 0 : 1)};
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 `;
