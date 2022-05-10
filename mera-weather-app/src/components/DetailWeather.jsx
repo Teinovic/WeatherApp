@@ -18,7 +18,7 @@ const DetailWeather = () => {
           <h4>{t("Humidity")}</h4>
         </Humidity>
         <AirPollution>
-          <h3>{weatherData.current.dew_point}&#176;</h3>
+          <h3>{Math.round(weatherData.current.dew_point)}&#176;</h3>
           <h4>{t("Dew. Pt.")}</h4>
         </AirPollution>
         <UvIndex>
@@ -26,7 +26,7 @@ const DetailWeather = () => {
           <h4>{t("UV Index")}</h4>
         </UvIndex>
         <Visibility>
-          <h3>{Math.round(weatherData.current.visibility / 1000)}km</h3>
+          <h3>{Math.round(weatherData.current.visibility / 1000).toFixed(1)}km</h3>
           <h4>{t("Visibility")}</h4>
         </Visibility>
       </DetailWrapper>
