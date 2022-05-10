@@ -23,7 +23,7 @@ export const Main = () => {
   // REEDUX define dispatch ... i import useDispathc for this and weatherActions for function showWeather
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather);
-  console.log('imgAndWeatherData', imgAndWeatherData);
+  console.log("imgAndWeatherData", imgAndWeatherData);
 
   //REDUX put weatherData in const
   let currentWeather = imgAndWeatherData?.weatherData || weatherData;
@@ -90,7 +90,6 @@ export const Main = () => {
 
   //   }
 
-    
   // }, []);
 
   // useEffect(() => {
@@ -120,10 +119,8 @@ export const Main = () => {
   //                }
   //              );
   //   }
-    
-  // }, [])
-  
 
+  // }, [])
 
   async function fetchCities() {
     const citiesResponse = await sendRequest({
@@ -173,26 +170,27 @@ export const Main = () => {
     //console.log('imgAndWeatherData', imgAndWeatherData.imgData.photos[0].image.mobile);
     //console.log("imgAndWeatherData",imgAndWeatherData.weatherData.lat);
     //console.log("imgAndWeatherData",imgAndWeatherData.weatherData.lon);
-      let resultFetching;
+    let resultFetching;
 
-      // function for REDUX  ...
-      const showWeather = () => {
-        dispatch(weatherAdded(resultFetching));
-      };
-      //OVO NE DIRAJ NIKAKO !!!!
+    // function for REDUX  ...
+    const showWeather = () => {
+      dispatch(weatherAdded(resultFetching));
+    };
+    //OVO NE DIRAJ NIKAKO !!!!
     if (imgAndWeatherData) {
-      localStorage.setItem("slika",imgAndWeatherData.imgData.photos[0].image.mobile);
-      localStorage.setItem("lat",imgAndWeatherData.weatherData.lat);
-      localStorage.setItem("lon",imgAndWeatherData.weatherData.lon);
+      localStorage.setItem(
+        "slika",
+        imgAndWeatherData.imgData.photos[0].image.mobile
+      );
+      localStorage.setItem("lat", imgAndWeatherData.weatherData.lat);
+      localStorage.setItem("lon", imgAndWeatherData.weatherData.lon);
       showWeather();
     }
 
-    if(localStorage.getItem("lat") && localStorage.getItem("lon")) {
+    if (localStorage.getItem("lat") && localStorage.getItem("lon")) {
       console.log("RADI!!!!");
       const lat = localStorage.getItem("lat");
       const lon = localStorage.getItem("lon");
-
-    
 
       fetch(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&appid=${API_KEY}`
@@ -230,16 +228,17 @@ export const Main = () => {
           }
         );
     }
-    
-    console.log('weatherData pre ucitavanja 7 dana !!!', weatherData)
+
+    console.log("weatherData pre ucitavanja 7 dana !!!", weatherData);
 
     //showWeather();
     // izbrisao weatherData iz niza
   }, [imgAndWeatherData]);
 
   // from currentCityApiData
-  const backgroundImage =
-    imgAndWeatherData ? imgAndWeatherData.imgData.photos[0].image.mobile : (localStorage.getItem("slika"));
+  const backgroundImage = imgAndWeatherData
+    ? imgAndWeatherData.imgData.photos[0].image.mobile
+    : localStorage.getItem("slika");
 
   if (error) return <h1>{error}</h1>;
 
@@ -258,7 +257,7 @@ export const Main = () => {
           }}
           style={{ fontSize: language === "en" && "1rem" }}
         >
-          English
+          EN
         </OptionEnglish>
         <OptionSerbian
           onClick={() => {
@@ -267,7 +266,7 @@ export const Main = () => {
           }}
           style={{ fontSize: language === "sr" && "1rem" }}
         >
-          Srpski
+          SRB
         </OptionSerbian>
       </LanguageWrapper>
 
@@ -312,13 +311,10 @@ const MainWrapper = styled.div`
     background-color: green;
   }
 
-  @media only screen 
-  and (min-device-width: 360px) 
-  and (max-device-width: 950px) 
-  and (orientation: landscape) { 
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     height: 60vh;
   }
-  
+
   @media (min-width: 768px) and (max-width: 1100px) {
     width: 100%;
     height: 70vh;
@@ -332,12 +328,9 @@ const SevenDays = styled.div`
   grid-template-columns: repeat(7, 1fr);
   color: white;
   height: 30vh;
-  grid-gap: 0px;
-  
-  @media only screen 
-  and (min-device-width: 360px) 
-  and (max-device-width: 950px) 
-  and (orientation: landscape) { 
+  grid-gap: 3px;
+
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     height: 7rem;
   }
 `;
@@ -345,7 +338,7 @@ const SevenDays = styled.div`
 const LanguageWrapper = styled.div`
   z-index: 5;
   position: absolute;
-  top: 0.5rem;
+  top: 1rem;
   right: 0.5rem;
 `;
 
