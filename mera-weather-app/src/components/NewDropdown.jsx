@@ -149,6 +149,19 @@ const Wrapper = styled.div`
 
 const CurrentDate = styled.h3`
   color: #f0f8ff;
+
+
+  @media only screen 
+  and (min-device-width: 360px) 
+  and (max-device-width: 950px) 
+  and (orientation: landscape) { 
+    padding: 0rem;
+  }
+`;
+
+const CurrentDate = styled.h3`
+  color: white;
+
   text-transform: uppercase;
   margin: 0;
   padding: 0;
