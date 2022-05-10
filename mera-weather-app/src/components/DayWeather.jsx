@@ -310,9 +310,7 @@ const waveAnimation = keyframes`
   0% {
     stroke-dashoffset: 0;
   }
-  10% {
-    opacity: 0;
-  }
+  
   100% {
     stroke-dashoffset: -10000;
   }
