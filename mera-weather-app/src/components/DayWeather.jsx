@@ -19,7 +19,6 @@ import { AnimatedNumber } from "./AnimatedNumber";
 //for app name
 import { AppName, Circle, CircleThree, CircleTwo } from "./styled/AppName";
 
-
 const DayWeather = () => {
   const { t } = useTranslation();
   const [active, setActive] = useState(false);
@@ -108,13 +107,27 @@ const DayWeather = () => {
   };
 
   useEffect(() => {
-    if (weatherData)
-      setTemp(Math.round(weatherData.current.temp).toString().split(""));
+    if (weatherData) {
+      if (Math.round(weatherData.current.temp).toString().split("").length > 1)
+        setTemp(Math.round(weatherData.current.temp).toString().split(""));
+      else {
+        const adjustedArray = Math.round(weatherData.current.temp)
+          .toString()
+          .split("");
+        adjustedArray.unshift("I");
+        setTemp(adjustedArray);
+      }
+    }
   }, [weatherData]);
 
   return (
     <DayWrapper>
-      <AppName><Circle/><CircleTwo/><CircleThree/>M&amp;O WeatherApp</AppName>
+      <AppName>
+        <Circle />
+        <CircleTwo />
+        <CircleThree />
+        M&amp;O WeatherApp
+      </AppName>
       <DayInfo>
         <Temperature>
           <div>
@@ -123,7 +136,8 @@ const DayWeather = () => {
                 temp.map((number, idx) => (
                   <AnimatedNumber temp={temp} number={number} idx={idx} />
                 ))}
-              <h4>&#176;</h4>
+
+              <DegreesSymbol>&#176;</DegreesSymbol>
             </NumsFlex>
           </div>
 
@@ -181,10 +195,7 @@ const DayWrapper = styled.div`
     margin-bottom: 0rem;
   }
 
-  @media only screen 
-  and (min-device-width: 360px) 
-  and (max-device-width: 950px) 
-  and (orientation: landscape) { 
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     height: 40vh;
   }
 
@@ -204,7 +215,7 @@ const DayInfo = styled.div`
   padding: 3rem 2rem 0rem 2rem;
 
   canvas {
-    z-index:1000;
+    z-index: 1000;
   }
 
   @media (max-width: 767px) {
@@ -215,10 +226,7 @@ const DayInfo = styled.div`
     padding: 1rem 1rem 0rem 1rem;
   }
 
-  @media only screen 
-  and (min-device-width: 360px) 
-  and (max-device-width: 950px) 
-  and (orientation: landscape) { 
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     canvas {
       font-size: 1.3rem;
     }
@@ -242,44 +250,30 @@ const Temperature = styled.div`
     margin: 0;
   }
 
-  @media only screen 
-  and (min-device-width: 360px) 
-  and (max-device-width: 950px) 
-  and (orientation: landscape) { 
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     p {
       font-size: 1rem;
     }
   }
-  
 
   transition: span 0.5s ease-in-out;
-`;
-
-const ZIndexAboveTempDiv = styled.div`
-  position: relative;
-  height: 4rem;
-  width: auto;
-  z-index: 2;
 `;
 
 const NumsFlex = styled.div`
   display: flex;
   z-index: 0;
 
-  @media only screen 
-  and (min-device-width: 360px) 
-  and (max-device-width: 950px) 
-  and (orientation: landscape) { 
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     h4 {
       font-size: 1.3rem;
     }
   }
+  overflow: hidden;
 `;
 
-const FadeSpan = styled.span`
-  transition: 0.5s;
-  opacity: ${({ state }) => (state === "entered" ? 1 : 0)};
-  display: ${({ state }) => (state === "exited" ? "none" : "block")};
+const DegreesSymbol = styled.h4`
+  position: absolute;
+  left: 6.5rem;
 `;
 
 const rotate = keyframes`
@@ -366,8 +360,5 @@ const UpdatedInfo = styled.span`
   margin: 0;
   z-index: 100;
 `;
-
-
-
 
 export default DayWeather;
