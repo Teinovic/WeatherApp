@@ -81,6 +81,7 @@ const customStyles = {
     // none of react-select's styles are passed to <Control />
     width: "fit-content",
     color: "#fff",
+    fontWeight: 700,
     display: "flex",
     backgroundColor: "transparent",
     fontSize: window.innerWidth > 767 ? "3rem" : "2rem",
@@ -137,16 +138,21 @@ const Wrapper = styled.div`
   z-index: 5;
   padding-top: 1rem;
   padding-left: 1rem;
+  padding-bottom: 2rem;
   background-color: transparent;
-  background: linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.35) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
 `;
 
 const CurrentDate = styled.h3`
-  color: lightgray;
+  color: #f0f8ff;
   text-transform: uppercase;
   margin: 0;
   padding: 0;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 1.8rem;
   padding-left: 0.7rem;
 
