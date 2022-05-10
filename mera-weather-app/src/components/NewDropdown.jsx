@@ -119,6 +119,7 @@ const Wrapper = styled.div`
   and (max-device-width: 950px) 
   and (orientation: landscape) { 
     padding: 0rem;
+    height: 7rem;
   }
 `;
 
