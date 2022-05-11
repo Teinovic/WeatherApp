@@ -80,6 +80,7 @@ const customStyles = {
   control: () => ({
     // none of react-select's styles are passed to <Control />
     width: "fit-content",
+    height: "4rem",
     color: "#fff",
     fontWeight: 700,
     display: "flex",
@@ -146,14 +147,19 @@ const Wrapper = styled.div`
     rgba(0, 0, 0, 0.35) 50%,
     rgba(0, 0, 0, 0) 100%
   );
+
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
+    height: 4rem;
+    padding: 0rem;
+  }
 `;
 
 const CurrentDate = styled.h3`
   color: #f0f8ff;
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
-    padding: 0rem;
-    height: 7rem;
+    padding: 0rem 0rem 0rem 1rem;
+    
   }
 
   text-transform: uppercase;

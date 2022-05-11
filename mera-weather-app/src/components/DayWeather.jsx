@@ -307,6 +307,10 @@ const RefreshButton = styled.button`
   border: none;
   margin-right: 1rem;
   z-index: 100;
+
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
+    font-size: 0.8rem;
+  }
 `;
 
 const waveAnimation = keyframes`
@@ -359,6 +363,10 @@ const UpdatedInfo = styled.span`
   letter-spacing: 0.2;
   margin: 0;
   z-index: 100;
+
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
+    font-size: 0.8rem;
+  }
 `;
 
 export default DayWeather;
