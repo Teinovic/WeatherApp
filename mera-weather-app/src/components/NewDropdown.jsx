@@ -146,6 +146,10 @@ const Wrapper = styled.div`
     rgba(0, 0, 0, 0.35) 50%,
     rgba(0, 0, 0, 0) 100%
   );
+
+  @media (max-width: 767px) {
+    padding-top: 2rem;
+  }
 `;
 
 const CurrentDate = styled.h3`

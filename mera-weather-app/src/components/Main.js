@@ -240,7 +240,14 @@ export const Main = () => {
     ? imgAndWeatherData.imgData.photos[0].image.mobile
     : localStorage.getItem("slika");
 
-  if (error) return <h1>{error}</h1>;
+  if (error)
+    return (
+      <ErrorDiv>
+        <h1 style={{ margin: "auto", width: "50%" }}>
+          {error} Try to refresh the page.
+        </h1>
+      </ErrorDiv>
+    );
 
   return (
     <MainWrapper>
@@ -339,7 +346,7 @@ const LanguageWrapper = styled.div`
   z-index: 5;
   position: absolute;
   top: 1rem;
-  right: 0.5rem;
+  right: 1rem;
 `;
 
 const OptionEnglish = styled.button`
@@ -360,4 +367,14 @@ const OptionSerbian = styled.button`
   cursor: pointer;
   overflow: hidden;
   outline: none;
+`;
+
+const ErrorDiv = styled.div`
+  background: linear-gradient(
+    180deg,
+    rgba(218, 238, 248, 1) 31%,
+    rgba(220, 240, 243, 1) 38%,
+    rgba(220, 240, 243, 1) 45%,
+    rgba(222, 252, 235, 1) 54%
+  );
 `;
