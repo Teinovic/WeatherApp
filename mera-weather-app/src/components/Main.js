@@ -331,7 +331,7 @@ const SevenDays = styled.div`
   grid-gap: 3px;
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
-    height: 7rem;
+    height: 8rem;
   }
 `;
 
