@@ -271,8 +271,20 @@ export const Main = () => {
       </LanguageWrapper>
 
       <SevenDays>
-        {imgAndWeatherData &&
+        {imgAndWeatherData ?
           imgAndWeatherData.weatherData.daily.slice(0, -1).map((day, key) => {
+            const date = new Date(day.dt * 1000);
+            const weekdayNum = date.getDay();
+
+            return (
+              <DayComponent
+                key={key}
+                typeOfWeather={day.weather[0].main}
+                maxTemp={day.temp.max}
+                weekdayNum={day.dt}
+              />
+            );
+          }) : weatherData?.daily.slice(0, -1).map((day, key) => {
             const date = new Date(day.dt * 1000);
             const weekdayNum = date.getDay();
 
