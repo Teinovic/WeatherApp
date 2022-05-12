@@ -83,6 +83,7 @@ const customStyles = {
     height: "4rem",
     color: "#fff",
     fontWeight: 700,
+    zIndex: 10000,
     display: "flex",
     backgroundColor: "transparent",
     fontSize: window.innerWidth > 767 ? "3rem" : "2rem",
@@ -102,6 +103,7 @@ const customStyles = {
       ...provided,
 
       svg: {
+        display: window.innerHeight < 415 && "none",
         height: window.innerWidth > 767 ? "2rem" : "1rem",
         width: window.innerWidth > 767 ? "2rem" : "1rem",
         color: "white",
@@ -121,10 +123,12 @@ const customStyles = {
     ...provided,
     width: 200,
     backgroundColor: "rgba(39, 127, 133, 1)",
+    zIndex: 10000,
     opacity: 0.8,
     height: 250,
     overflow: "hidden",
     borderRadius: "0.5rem",
+    display: window.innerHeight < 415 && "none",
   }),
 
   input: (provided) => ({
