@@ -17,6 +17,7 @@ const initialState = {
       },
     ],
   },
+  daily: [],
   lat: 44.804,
   lon: 20.4651,
   timezone: "nista",
