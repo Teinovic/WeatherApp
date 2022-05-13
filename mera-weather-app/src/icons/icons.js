@@ -73,89 +73,89 @@ const icons = {
 // animation: ${ThunderAnimation} 2s infinite;
 // `
 
-export const Drizzle = ()=> {
+export const Drizzle = (props)=> {
     return (
     <ReactAnimatedWeather
     icon={icons.SLEET}
     color={defaults.color}
-    size={defaults.size}
+    size={props.size}
     animate={defaults.animate}
   />
     )
 };
 
-export const Rain = ()=> {
+export const Rain = (props)=> {
     return (
     <ReactAnimatedWeather
     icon={icons.RAINY}
     color={defaults.color}
-    size={defaults.size}
+    size={props.size}
     animate={defaults.animate}
   />
     )
 };
 
-export const Snow = ()=> {
+export const Snow = (props)=> {
     return (
     <ReactAnimatedWeather
     icon={icons.SNOW}
     color={defaults.color}
-    size={defaults.size}
+    size={props.size}
     animate={defaults.animate}
   />
     )
 };
 
-export const Wind = () => {
+export const Wind = (props) => {
   return (
     <ReactAnimatedWeather 
       icon={icons.WIND}
       color={defaults.color}
-      size={defaults.size}
+      size={props.size}
       animate={defaults.animate}
     />
   )
 }
 
-export const Clear = ()=> {
+export const Clear = (props)=> {
    return (
     <ReactAnimatedWeather
     icon={icons.CLEAR}
     color={defaults.color}
-    size={defaults.size}
+    size={props.size}
     animate={defaults.animate}
   />
   )
 };
 
-export const Clouds = ()=> {
+export const Clouds = (props)=> {
     return (
     <ReactAnimatedWeather
     icon={icons.CLOUDY}
     color={defaults.color}
-    size={defaults.size}
+    size={props.size}
     animate={defaults.animate}
   />
     )
 };
 
-export const Haze = ()=> {
+export const Haze = (props)=> {
     return (
     <ReactAnimatedWeather
     icon={icons.FOG}
     color={defaults.color}
-    size={defaults.size}
+    size={props.size}
     animate={defaults.animate}
   />
     )
 };
 
-export const Fog = ()=> {
+export const Fog = (props)=> {
     return (
     <ReactAnimatedWeather
     icon={icons.FOG}
     color={defaults.color}
-    size={defaults.size}
+    size={props.size}
     animate={defaults.animate}
   />
   )

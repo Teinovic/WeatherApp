@@ -144,9 +144,9 @@ const DayWeather = () => {
           <p>{t(weatherData?.current?.weather[0].main)}</p>
         </Temperature>
 
-        <IconContext.Provider value={{ size: 80 }}>
-          <WeatherIcon typeOfWeather={weatherData?.current?.weather[0].main} />
-        </IconContext.Provider>
+        <IconDiv>
+          <WeatherIcon typeOfWeather={weatherData?.current?.weather[0].main} size={window.innerHeight > 450 ? (window.innerWidth > 767 ? 75 : 50) : 35} />
+        </IconDiv>
       </DayInfo>
       <RefreshContainer>
         <RefreshButton active={active} onClick={updateState}>
@@ -257,6 +257,28 @@ const Temperature = styled.div`
   }
 
   transition: span 0.5s ease-in-out;
+`;
+
+const IconDiv = styled.div`
+  object-fit: contain;
+  z-index: 999;
+
+  // @media (max-width: 767px) {
+    
+  //   canvas {
+  //     width: 3.5rem;
+  //     height: 3.5rem;
+  //   }
+  // }
+
+
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
+    canvas {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    
+  }
 `;
 
 const NumsFlex = styled.div`
