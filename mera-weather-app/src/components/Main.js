@@ -346,7 +346,7 @@ const SevenDays = styled.div`
   }
 
   @media screen and (min-width: 1800px) {
-      height: 20vh;
+      height: 19vh;
   }
 `;
 
