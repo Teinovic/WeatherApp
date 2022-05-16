@@ -29,8 +29,8 @@ const Day = styled.div`
   border-top: none;
 
   canvas {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
   }
 
   :hover {
@@ -61,7 +61,7 @@ const Day = styled.div`
 `;
 
 const TemperatureNum = styled.p`
-  font-size: 2rem;
+  font-size: 2.5rem;
 
   @media (max-width: 767px) {
     font-size: 1.5rem;
