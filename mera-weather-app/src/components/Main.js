@@ -317,10 +317,9 @@ const MainWrapper = styled.div`
   transition: background-image 1s ease-in-out;
 
   @media (max-width: 767px) {
-    width: 100%;
-    height: 100vh;
-    // max-height: 100vh;
-    background-color: green;
+    width: 90%;
+    height: 90vh;
+    // place-items: center;
   }
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
