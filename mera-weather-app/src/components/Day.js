@@ -27,6 +27,7 @@ const Day = styled.div`
   backdrop-filter: blur(8px) brightness(65%);
   // border: solid 0.2px grey;
   border-top: none;
+  padding-top: 1rem;
 
   canvas {
     width: 50px;
