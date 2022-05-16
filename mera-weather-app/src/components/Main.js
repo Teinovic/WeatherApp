@@ -339,15 +339,16 @@ const SevenDays = styled.div`
   grid-template-columns: repeat(7, 1fr);
   color: white;
   height: 30vh;
+  max-height: 16rem;
   grid-gap: 3px;
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     height: 8rem;
   }
 
-  @media screen and (min-width: 1800px) {
-      height: 19vh;
-  }
+  // @media screen and (min-width: 1800px) {
+  //     height: 19vh;
+  // }
 `;
 
 const LanguageWrapper = styled.div`
