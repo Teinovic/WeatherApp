@@ -296,6 +296,10 @@ const DegreesSymbol = styled.h4`
   position: absolute;
   left: 6.5rem;
 
+  @media (max-width: 767px) {
+    left: 5.5rem;
+   }
+
   @media (min-width: 768px) and (max-width: 1100px) {
     left: 5rem;
   }
