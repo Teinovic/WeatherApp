@@ -344,6 +344,10 @@ const SevenDays = styled.div`
   @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     height: 8rem;
   }
+
+  @media screen and (min-width: 1800px) {
+      height: 20vh;
+  }
 `;
 
 const LanguageWrapper = styled.div`
