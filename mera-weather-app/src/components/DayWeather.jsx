@@ -173,7 +173,6 @@ const DayWrapper = styled.div`
   height: 60vh;
   width: 100%;
   display: grid;
-
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 25%;
   background: linear-gradient(
@@ -190,8 +189,8 @@ const DayWrapper = styled.div`
   margin-bottom: 1rem;
 
   @media (max-width: 767px) {
-    width: 100%;
-    height: 50vh;
+    width: 90%;
+    height: 45vh;
     margin-bottom: 0rem;
   }
 

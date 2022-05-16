@@ -22,6 +22,8 @@ const SideWrapper = styled.div`
     width: 100%;
     height: 100vh;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     margin-right: 0rem;
   }
 

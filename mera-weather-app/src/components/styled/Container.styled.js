@@ -13,4 +13,9 @@ export const Container = styled.main`
   );
   display: grid;
   place-items: center;
+
+  @media (max-width: 767px) {
+    width: 100%;
+    height: 200vh;
+  }
 `;
