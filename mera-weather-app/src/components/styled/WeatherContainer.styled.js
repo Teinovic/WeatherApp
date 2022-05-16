@@ -23,4 +23,9 @@ export const WeatherContainer = styled.div`
     width: 100%;
     height: 100vh;
   }
+
+  @media screen and (min-width: 1800px) {
+    width: 60%;
+    height: 50vh;
+  }
 `;
