@@ -84,7 +84,7 @@ const DayName = styled.p`
   padding-top: 0.5vh;
   align-items: center;
   justify-content: space-around;
-  font-size: 0.8rem;
+  font-size: 1.3rem;
   text-transform: uppercase;
   font-weight: 500;
 
