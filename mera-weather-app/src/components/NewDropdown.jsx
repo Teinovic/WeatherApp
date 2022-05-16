@@ -98,7 +98,6 @@ const customStyles = {
     border: "none",
   }),
   dropdownIndicator: (provided, state) => {
-    console.log(state);
     return {
       ...provided,
 
@@ -129,6 +128,8 @@ const customStyles = {
     overflow: "hidden",
     borderRadius: "0.5rem",
     display: window.innerHeight < 415 && "none",
+    paddingTop: 0,
+    marginTop: 0,
   }),
 
   input: (provided) => ({
@@ -163,7 +164,6 @@ const CurrentDate = styled.h3`
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     padding: 0rem 0rem 0rem 1rem;
-    
   }
 
   text-transform: uppercase;
