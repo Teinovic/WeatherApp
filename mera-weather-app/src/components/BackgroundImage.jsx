@@ -29,26 +29,20 @@ export const BackgroundImage = ({ imageLocation, getResponsePending }) => {
     <>
       <SwitchTransition mode="in-out">
         <CSSTransition key={imageLocation} timeout={1000} classNames="fade">
-          <BackgroundImageDiv img={imageLocation} />
-        </CSSTransition>
-      </SwitchTransition>
-      <SwitchTransition>
-        <CSSTransition
-          key={moreThanOneSecGetReq}
-          classNames="fade"
-          timeout={1000}
-        >
           <>
-            {moreThanOneSecGetReq && (
-              <Wrapper>
-                <DotWave
-                  size={47}
-                  speed={1}
-                  color="white"
-                  styles={{ zIndex: 3 }}
-                />
-              </Wrapper>
-            )}
+            <BackgroundImageDiv img={imageLocation} />
+            <>
+              {moreThanOneSecGetReq && (
+                <Wrapper>
+                  <DotWave
+                    size={47}
+                    speed={1}
+                    color="white"
+                    styles={{ zIndex: 3 }}
+                  />
+                </Wrapper>
+              )}
+            </>
           </>
         </CSSTransition>
       </SwitchTransition>
