@@ -202,7 +202,7 @@ const DayWrapper = styled.div`
     grid-template-rows: 80% 20%;
     width: 50%;
     height: 30vh;
-    margin: 0;
+    margin: 0rem 1rem 0rem 0rem;
   }
 `;
 
