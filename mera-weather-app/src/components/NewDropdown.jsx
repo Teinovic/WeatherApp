@@ -124,7 +124,7 @@ const customStyles = {
     backgroundColor: "rgba(39, 127, 133, 1)",
     zIndex: 10000,
     opacity: 0.8,
-    height: 250,
+    height: 200,
     overflow: "hidden",
     borderRadius: "0.5rem",
     display: window.innerHeight < 415 && "none",
