@@ -23,14 +23,11 @@ const SideWrapper = styled.div`
     height: 100vh;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin-right: 0rem;
   }
 
-  @media only screen 
-  and (min-device-width: 360px) 
-  and (max-device-width: 950px) 
-  and (orientation: landscape) { 
+  @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     height: 40vh;
     flex-direction: row;
   }
@@ -41,8 +38,7 @@ const SideWrapper = styled.div`
     margin-top: 1rem;
     flex-direction: row;
     margin-right: 0rem;
-    justify-content: space-between;
-
+    justify-content: space-around;
   }
 `;
 
