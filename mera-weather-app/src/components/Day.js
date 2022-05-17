@@ -35,15 +35,12 @@ const Day = styled.div`
   }
 
   :hover {
-    transform-origin: bottom center;
+    ${window.innerWidth > 767 &&
+    `transform-origin: bottom center;
     -webkit-transform: scale(1, 1.1);
     -ms-transform: scale(1, 1.1);
     transform: scale(1, 1.1);
-
-    border: grey;
-    border-top: none;
-
-    transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;`}
     background-color: rgba(255, 255, 255, 0.3);
     //backdrop-filter: blur(8px);
     filter: brightness(5);
