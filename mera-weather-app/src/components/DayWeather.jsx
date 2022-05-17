@@ -218,11 +218,11 @@ const DayInfo = styled.div`
   }
 
   @media (max-width: 767px) {
-    padding: 1rem 1rem 0rem 1rem;
+    padding: 1rem 2rem 0rem 2rem;
   }
 
   @media (min-width: 768px) and (max-width: 1100px) {
-    padding: 1rem 1rem 0rem 1rem;
+    padding: 2rem 1rem 0rem 1rem;
   }
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
@@ -297,7 +297,7 @@ const DegreesSymbol = styled.h4`
   left: 6.5rem;
 
   @media (max-width: 767px) {
-    left: 5.5rem;
+    left: 6rem;
    }
 
   @media (min-width: 768px) and (max-width: 1100px) {
