@@ -8,8 +8,9 @@ export const WeatherContainer = styled.div`
   @media (max-width: 767px) {
     width: 100%;
     height: 200vh;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
+    justify-content: space-around;
   }
   @media (min-width: 768px) and (max-width: 1100px) {
     width: 90%;
