@@ -339,6 +339,9 @@ const SevenDays = styled.div`
   grid-template-columns: repeat(7, 1fr);
   color: white;
   height: 30vh;
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-color: red blue;
   // max-height: 19rem;
   grid-gap: 3px;
 

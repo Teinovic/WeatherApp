@@ -16,6 +16,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+::-webkit-scrollbar{
+  height: 9px;
+  width: 4px;
+  background: gray;
+}
+::-webkit-scrollbar-thumb:horizontal{
+  background: rgba(220, 240, 243, 1);
+  border-radius: 10px;
+  height: 25px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
