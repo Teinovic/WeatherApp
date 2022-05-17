@@ -47,6 +47,8 @@ const Day = styled.div`
   }
 
   @media (max-width: 767px) {
+    width: 6rem;
+
     canvas {
       width: 40px;
       height: 40px;
