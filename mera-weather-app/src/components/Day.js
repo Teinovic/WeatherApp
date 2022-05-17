@@ -59,6 +59,10 @@ const Day = styled.div`
   @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     height: 8rem;
   }
+
+  @media (min-width: 768px) and (max-width: 1100px) {
+    padding-top: 0rem;
+  }
 `;
 
 const TemperatureNum = styled.p`

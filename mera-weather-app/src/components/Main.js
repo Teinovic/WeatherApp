@@ -339,7 +339,7 @@ const SevenDays = styled.div`
   grid-template-columns: repeat(7, 1fr);
   color: white;
   height: 30vh;
-  max-height: 16rem;
+  // max-height: 19rem;
   grid-gap: 3px;
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
