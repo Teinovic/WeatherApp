@@ -340,10 +340,12 @@ const SevenDays = styled.div`
   color: white;
   height: 30vh;
   width: 100%;
-  overflow-x: auto;
-  scrollbar-color: red blue;
   // max-height: 19rem;
   grid-gap: 3px;
+
+  @media (max-width: 767px) {
+    overflow-x: auto;
+  }
 
   @media only screen and (min-device-width: 360px) and (max-device-width: 950px) and (orientation: landscape) {
     height: 8rem;
